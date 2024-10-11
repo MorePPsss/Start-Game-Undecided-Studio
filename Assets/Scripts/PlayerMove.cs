@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerAgent = GetComponent<NavMeshAgent>(); //获得组件GetComponent
+        playerAgent = GetComponent<NavMeshAgent>(); //获得NavMeshAgent组件
     }
 
     // Update is called once per frame
@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))// 检测鼠标左键点击
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 从相机向鼠标点击位置发射射线
+            Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();// 获取当前的摄像机实例
+            Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit; // 声明一个 RaycastHit 变量，准备存储射线结果
             bool isCollide = Physics.Raycast(ray, out hit);
             if (isCollide)
