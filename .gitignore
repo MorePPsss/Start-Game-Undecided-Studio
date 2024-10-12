@@ -75,3 +75,5 @@ crashlytics-build.properties
 Assets/Scenes/TestScene.unity
 Assets/Scenes/TestScene.unity.meta
 /Assets
+/Packages
+/ProjectSettings/Packages
