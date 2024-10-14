@@ -25,7 +25,14 @@ public class PlayerController : MonoBehaviour
             bool isCollide = Physics.Raycast(ray, out hit);
             if (isCollide)
             {
-                playerAgent.SetDestination(hit.point);//调用SetDestination方法，设置玩家移动目的地
+                if(hit.collider.tag == "Ground")
+                {
+                    playerAgent.SetDestination(hit.point);//调用SetDestination方法，设置玩家移动目的地
+                }else if(hit.collider.tag == "Interactable")
+                {
+                    hit.collider.GetComponent<InteractableObject>().OnClick(playerAgent);
+                }
+                
             }
         }
     }
