@@ -74,6 +74,5 @@ crashlytics-build.properties
 # Ignore test scenes
 Assets/Scenes/TestScene.unity
 Assets/Scenes/TestScene.unity.meta
-/Assets
 /Packages
 /ProjectSettings/Packages
