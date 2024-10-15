@@ -17,6 +17,8 @@ public class ItemSO : ScriptableObject
     public List<Ability> AbilityList;// 机器人解锁的能力
     public Sprite icon;// 物品在背包里的图标
     public GameObject prefab;// 物品的预制体
+    [Header("Equipment")]
+    public GameObject Equipment_prefab;
 }
 
 //物品类型
