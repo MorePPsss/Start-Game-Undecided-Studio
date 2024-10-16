@@ -16,6 +16,14 @@ public class PauseMenu : MonoBehaviour
             }
             else Pause();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
+        }
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene("Main");
     }
     public void Resume()
     {

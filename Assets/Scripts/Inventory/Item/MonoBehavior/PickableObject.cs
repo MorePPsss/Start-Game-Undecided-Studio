@@ -10,6 +10,7 @@ public class PickableObject : InteractableObject
         Debug.Log("玩家捡起物品！");
         Destroy(this.gameObject);
         //TODO 放入背包数据结构
-        InventoryManager.Instance.AddItem(itemSO);
+        InventoryManager.Instance.InventoryData.AddItem(itemSO);
+        InventoryManager.Instance.InventoryUI.RefreshUI();
     }
 }

@@ -23,6 +23,25 @@ public class InventoryManager : MonoBehaviour
     public int id;
     public string name;
     public string description;
+    [Header("Inventory Data")]
+    public ItemDBSO InventoryData;
+    [Header("ContainerS")]
+    public ContainerUI InventoryUI;
+
+
+    void Start()
+    {
+        if (InventoryUI != null)
+        {
+            InventoryUI.RefreshUI();
+        }
+        else
+        {
+            Debug.LogError("Container UI is not assigned!");
+        }
+
+    }
+
 
     public void AddItem(ItemSO itemSO)
     {
