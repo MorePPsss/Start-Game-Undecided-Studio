@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*实现背包添加&移除逻辑*/
+/*实锟街憋拷锟斤拷锟斤拷锟斤拷&锟狡筹拷锟竭硷拷*/
 public class InventoryManager : MonoBehaviour
 {
-    //单例模式
+    //锟斤拷锟斤拷模式
     public static InventoryManager Instance { get; private set; }
     private void Awake()
     {
@@ -16,24 +16,33 @@ public class InventoryManager : MonoBehaviour
         }
         Instance = this;
     }
-    
-    public List<ItemSO> itemList;//运行游戏 拾取测试物品 点开场景中的Manager游戏对象 通过Inspector观察是否正确捡起
+    public class DragData{
+        public SlotHolder originalHolder;
+        public RectTransform originalParent;
+    }
+  
 
-    //测试
-    public int id;
-    public string name;
-    public string description;
+
     [Header("Inventory Data")]
     public ItemDBSO InventoryData;
+    public ItemDBSO actionData;
+    public ItemDBSO equipmentData;
+
     [Header("ContainerS")]
     public ContainerUI InventoryUI;
+    public ContainerUI actionUI;
+    public ContainerUI equipmentUI;
 
-
+    [Header("Drag Canvas")]
+    public Canvas dragCanvas;
+    public DragData currentDrag;
     void Start()
     {
         if (InventoryUI != null)
         {
             InventoryUI.RefreshUI();
+            actionUI.RefreshUI();
+            equipmentUI.RefreshUI();
         }
         else
         {
@@ -41,28 +50,50 @@ public class InventoryManager : MonoBehaviour
         }
 
     }
-
-
-    public void AddItem(ItemSO itemSO)
+    #region 
+    public bool CheckInInventoryUI(Vector3 position)
     {
-        itemList.Add(itemSO);
-        showItemDetail(itemSO);//测试使用
-
-        //TODO 在背包UI中显示该物品
-
-        //TODO 如果有必要可以弹出一个message来提示为玩家捡到了什么
+        for (int i = 0; i < InventoryUI.slotHolders.Length; i++)
+        {
+            RectTransform t = InventoryUI.slotHolders[i].transform as RectTransform;
+            if(RectTransformUtility.RectangleContainsScreenPoint(t,position))
+            {
+                return true;
+            }
+        }
+        return false;
     }
-
-    public void RemoveItem(ItemSO itemSO) 
+    public bool CheckInActionUI(Vector3 position)
     {
-        itemList.Remove(itemSO);
+        for (int i = 0; i < actionUI.slotHolders.Length; i++)
+        {
+            RectTransform t = actionUI.slotHolders[i].transform as RectTransform;
+
+            if(RectTransformUtility.RectangleContainsScreenPoint(t,position))
+            {
+                return true;
+            }
+        }
+        return false;
     }
-
-    //测试使用
-    public void showItemDetail(ItemSO itemSO)
+    public bool CheckInEquipmentUI(Vector3 position)
     {
-        id = itemSO.id;
-        name = itemSO.name;
-        description = itemSO.description;
+        for (int i = 0; i < equipmentUI.slotHolders.Length; i++)
+        {
+            RectTransform t = equipmentUI.slotHolders[i].transform as RectTransform;
+
+            if(RectTransformUtility.RectangleContainsScreenPoint(t,position))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
+#endregion
+
+
+
+
+
+//锟斤拷锟斤拷使锟斤拷
