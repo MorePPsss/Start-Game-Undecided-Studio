@@ -55,5 +55,9 @@ public class PlayerController : MonoBehaviour
                 HandleOffMeshLink();
             }
         }
+        else
+        {
+            playerAgent.autoTraverseOffMeshLink = true;
+        }
     }
 }
