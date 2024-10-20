@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - Interactable
   - Pickable
-  - Gear
   layers:
   - Default
   - TransparentFX

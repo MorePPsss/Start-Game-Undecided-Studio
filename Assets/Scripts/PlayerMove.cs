@@ -8,7 +8,6 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent playerAgent; // 玩家角色的 NavMesh Agent
-    private Animator playerAnimator; //玩家角色的Animator
     private OffMeshLink[] offMeshLinks; // 场景中所有的offMesh link
     [SerializeField] private bool haveSpring = true; // TODO 玩家是否装备弹簧
     // Start is called before the first frame update
@@ -24,14 +23,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerAgent = GetComponent<NavMeshAgent>(); //获得NavMeshAgent组件
-        playerAnimator = GetComponent<Animator>();
-        playerAnimator.enabled = false; //在游戏开始阶段禁用玩家的动画组件，避免移动失效！by-kehao
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))// 检测鼠标左键点击 by-kehao
+        if (Input.GetMouseButtonDown(0))// 检测鼠标左键点击
         {
             Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();// 获取当前的摄像机实例
             Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
@@ -41,9 +38,8 @@ public class PlayerController : MonoBehaviour
             {
                 if(hit.collider.tag == Tag.GROUND)
                 {
-                    playerAgent.SetDestination(hit.point);//调用SetDestination方法，设置玩家移动目的地 by-kehao
-                }
-                else if(hit.collider.tag == Tag.INTERACTABLE)
+                    playerAgent.SetDestination(hit.point);//调用SetDestination方法，设置玩家移动目的地
+                }else if(hit.collider.tag == Tag.INTERACTABLE)
                 {
                     hit.collider.GetComponent<InteractableObject>().OnClick(playerAgent);
                 }

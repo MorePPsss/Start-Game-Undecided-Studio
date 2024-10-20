@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class InteractableObject : MonoBehaviour
 {
-    public NavMeshAgent playerAgent;
+    private NavMeshAgent playerAgent;
     private bool haveInteracted = false;
     public void OnClick(NavMeshAgent playerAgent)
     {
