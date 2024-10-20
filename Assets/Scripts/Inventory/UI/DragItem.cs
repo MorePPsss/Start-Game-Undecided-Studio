@@ -56,7 +56,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         SwapItem();
                     break;
                     case SlotType.ACTION:
-                    break;
+                        SwapItem();
+                     break;
                 }
                 currentHolder.UpdateItem();
                 targetHolder.UpdateItem();
