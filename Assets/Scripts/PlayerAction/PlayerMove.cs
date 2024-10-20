@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.EventSystems;
 
 
 public class PlayerController : MonoBehaviour
@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent playerAgent; // 玩家角色的 NavMesh Agent
     private Animator playerAnimator; //玩家角色的Animator
     private OffMeshLink[] offMeshLinks; // 场景中所有的offMesh link
-    [SerializeField] private bool haveSpring = true; // TODO 玩家是否装备弹簧
+    [SerializeField] private bool haveSpring = false; // TODO 玩家是否装备弹簧
+    ItemUI item;
     // Start is called before the first frame update
 
     void HandleOffMeshLink()
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
             Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit; // 声明一个 RaycastHit 变量，准备存储射线结果
             bool isCollide = Physics.Raycast(ray, out hit);
+            isSpring();
             if (isCollide)
             {
                 if(hit.collider.tag == Tag.GROUND)
@@ -48,6 +50,15 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<InteractableObject>().OnClick(playerAgent);
                 }
             }
+        }
+
+        void isSpring()
+        {
+            if (InventoryManager.Instance.equipmentData.itemList[1].itemData != null)
+                haveSpring = true;
+            else
+            haveSpring = false;
+            //Debug.Log(InventoryManager.Instance.equipmentData.itemList[0].itemData);
         }
 
         // 玩家未装备弹簧则自定义OffMeshLink行为
