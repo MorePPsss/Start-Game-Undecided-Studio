@@ -17,13 +17,13 @@ public class SlotHolder : MonoBehaviour
                 itemUI.Bag = InventoryManager.Instance.InventoryData;
                 break;
             case SlotType.ACTION:
-                itemUI.Bag = InventoryManager.Instance.InventoryData;
+                itemUI.Bag = InventoryManager.Instance.actionData;
                 break;
             case SlotType.WEAPON:
-                itemUI.Bag = InventoryManager.Instance.InventoryData;
+                itemUI.Bag = InventoryManager.Instance.equipmentData;
                 break;
             case SlotType.FEET:
-                itemUI.Bag = InventoryManager.Instance.InventoryData;
+                itemUI.Bag = InventoryManager.Instance.equipmentData;
                 break;
         }
 

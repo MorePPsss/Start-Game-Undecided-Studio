@@ -42,9 +42,11 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 if (eventData.pointerEnter.gameObject.GetComponent<SlotHolder>())
                     targetHolder = eventData.pointerEnter.gameObject.GetComponent<SlotHolder>();
+                
                 else
                     targetHolder = eventData.pointerEnter.gameObject.GetComponentInParent<SlotHolder>();
-                switch(targetHolder.slotType)
+                Debug.Log(eventData.pointerEnter.gameObject.GetComponent<SlotHolder>());
+                switch (targetHolder.slotType)
                 {
                     case SlotType.BAG:
                         SwapItem();
@@ -56,6 +58,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         SwapItem();
                     break;
                     case SlotType.ACTION:
+                        SwapItem();
                     break;
                 }
                 currentHolder.UpdateItem();
