@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))// Detect left mouse click -By Kehao
         {
+            if (InteractWithUI()) return;
             Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();
             Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit; // Declare a RaycastHit variable to store ray results
@@ -54,7 +55,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-       
+        bool InteractWithUI()
+        {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            {
+                return true;
+            }
+            else return false;
+        }
 
 
         void isSpring()
