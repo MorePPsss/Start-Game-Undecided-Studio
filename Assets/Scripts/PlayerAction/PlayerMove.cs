@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     }
     [SerializeField] private bool haveSpring = false; // TODO 玩家是否装备弹簧
     ItemUI item;
-    // Start is called before the first frame update
-
     void HandleOffMeshLink()
     {
         // 在玩家通过offmeshlink后直接传送回原位
@@ -29,26 +27,26 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        playerAgent = GetComponent<NavMeshAgent>(); //获得NavMeshAgent组件
+        playerAgent = GetComponent<NavMeshAgent>();
         playerAnimator = GetComponent<Animator>();
-        playerAnimator.enabled = false; //在游戏开始阶段禁用玩家的动画组件，避免移动失效！by-kehao
+        playerAnimator.enabled = false; //Disable the player's animation components at the beginning of the game to avoid movement failure!by-kehao
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))// 检测鼠标左键点击 by-kehao
+        if (Input.GetMouseButtonDown(0))// Detect left mouse click -By Kehao
         {
-            Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();// 获取当前的摄像机实例
+            Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();
             Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit; // 声明一个 RaycastHit 变量，准备存储射线结果
+            RaycastHit hit; // Declare a RaycastHit variable to store ray results
             bool isCollide = Physics.Raycast(ray, out hit);
             isSpring();
             if (isCollide)
             {
-                if(hit.collider.tag == Tag.GROUND)
+                if(hit.collider.tag == Tag.GROUND || hit.collider.tag == Tag.BUTTON)
                 {
-                    playerAgent.SetDestination(hit.point);//调用SetDestination方法，设置玩家移动目的地 by-kehao
+                    playerAgent.SetDestination(hit.point);//Call the SetDestination method to set the player's destination for movement -By Kehao
                 }
                 else if(hit.collider.tag == Tag.INTERACTABLE)
                 {

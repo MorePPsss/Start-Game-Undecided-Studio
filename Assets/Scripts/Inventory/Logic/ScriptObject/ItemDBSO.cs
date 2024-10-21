@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*π‹¿ÌItemSO*/
+/*Manage ItemSO -By Kehao*/
 [CreateAssetMenu]
 public class ItemDBSO : ScriptableObject
 {
