@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,11 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent playerAgent; // 玩家角色的 NavMesh Agent
     private Animator playerAnimator; //玩家角色的Animator
     private OffMeshLink[] offMeshLinks; // 场景中所有的offMesh link
+    public Vector3 Getposition()
+    {
+        return this.transform.position;
+    }
+
     [SerializeField] private bool haveSpring = false; // TODO 玩家是否装备弹簧
     ItemUI item;
     // Start is called before the first frame update
@@ -51,6 +57,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+       
+
 
         void isSpring()
         {
