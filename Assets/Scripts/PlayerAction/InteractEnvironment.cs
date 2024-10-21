@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-/*The script currently serves as a series of logic and animations generated for the interaction between players and the mechanisms in the environment -By Kehao
-  TODO This part of the logic should be encapsulated later on
+/*该脚本目前作用 为了玩家和环境中的机关互动而产生的一系列 逻辑+动画 -By Kehao
+  TODO 这部分逻辑后期应该进行封装
  */
 public class PlayerInteract : InteractableObject
 {
@@ -13,9 +13,9 @@ public class PlayerInteract : InteractableObject
     private Animator playerAnimator;
     private bool isLeverPulled = false;
 
-    public GameObject platformObject;
-    public GameObject playerObject;
-    public float playerBoomJumpWaitTime;// This variable also tries to synchronize with the player's ejection animation playback as much as possible when the machine explodes -By Kehao
+    public GameObject platformObject; // 平台对象
+    public GameObject playerObject; // 玩家对象
+    public float playerBoomJumpWaitTime;// 该变量亦在使机器爆炸时尽量和玩家弹射动画播放同步 -By Kehao
     //public ExplodeBlocks explodeBlocks;
 
     protected override void Interact()
@@ -25,6 +25,7 @@ public class PlayerInteract : InteractableObject
         playerAnimator = playerObject.GetComponent<Animator>();
         playerAgent = playerObject.GetComponent<NavMeshAgent>();
 
+        // 拉下拉杆，播放拉杆动画
         leverAnimator.SetBool("Pull", true);
         if (!isLeverPulled)
         {
@@ -32,12 +33,12 @@ public class PlayerInteract : InteractableObject
             isLeverPulled = true;
         }
     }
-    /*The function of WaitForLeverAnimation()：
-        To ensure that the machine can only start playing the shaking animation after the end of the pull rod animation -By Kehao
+    /*协程WaitForLeverAnimation()作用：
+        为了确保拉杆动画结束后 机器才能开始播放抖动动画 -By Kehao
      */
     IEnumerator WaitForLeverAnimation()
     {
-        // Waiting for the scrolling animation to play to the "PullBar" state
+        // 等待拉杆动画播放到"PullBar"状态
         AnimatorStateInfo leverStateInfo = leverAnimator.GetCurrentAnimatorStateInfo(0);
         while (!leverStateInfo.IsName("PullBar"))
         {
@@ -45,17 +46,17 @@ public class PlayerInteract : InteractableObject
             yield return null;
         }
 
-        // Waiting for the end of the scrolling animation playback
+        // 等待拉杆动画播放结束
         while (leverStateInfo.normalizedTime < 1.0f || leverAnimator.IsInTransition(0))
         {
             leverStateInfo = leverAnimator.GetCurrentAnimatorStateInfo(0);
             yield return null;
         }
 
-        // After the scrolling animation ends, play the platform animation
+        // 拉杆动画结束后，播放平台动画
         platformAnimator.SetBool("Shake", true);
 
-        // Waiting for the platform animation to play to the 'SteamMechanicShake' state
+        // 等待平台动画播放到"SteamMachineShake"状态
         AnimatorStateInfo platformStateInfo = platformAnimator.GetCurrentAnimatorStateInfo(0);
         while (!platformStateInfo.IsName("SteamMachineShake"))
         {
@@ -63,27 +64,27 @@ public class PlayerInteract : InteractableObject
             yield return null;
         }
 
-        // Waiting for the end of the platform animation playback
+        // 等待平台动画播放结束
         while (platformStateInfo.normalizedTime < 1.0f || platformAnimator.IsInTransition(0))
         {
             platformStateInfo = platformAnimator.GetCurrentAnimatorStateInfo(0);
             yield return null;
         }
-        /*Adjust player orientation：
-         In order to ensure that the landing point of the player's ejection due to the explosion of the machine is correct -By Kehao
+        /*调整玩家朝向：
+         为了使玩家因为机器爆炸而弹射而出的落点正确 -By Kehao
          */
-        Quaternion currentRotation = playerObject.transform.rotation;
-        playerObject.transform.rotation = Quaternion.LookRotation(Vector3.forward);
-        playerAgent.enabled = false;// Temporarily disable NavMeshAgent to prevent it from interfering with animations
+        Quaternion currentRotation = playerObject.transform.rotation;// 获取玩家当前朝向
+        // 重置玩家朝向为动画的初始方向（假设动画是从前方播放的）
+        playerObject.transform.rotation = Quaternion.LookRotation(Vector3.forward); // 设定动画为面向前方
 
-        if (playerObject.transform.position.y > 1)
-        {
-            playerAnimator.enabled = true;
-            playerAnimator.SetBool("BoomJump", true);
-        }
-        yield return new WaitForSeconds(playerBoomJumpWaitTime);//Machine explosion and animation synchronization
+        playerAgent.enabled = false;// 暂时禁用 NavMeshAgent 以防止它干扰动画
+
+        playerAnimator.enabled = true;// 启用 Animator 并设置播放动画
+        playerAnimator.SetBool("BoomJump", true);
+
+        yield return new WaitForSeconds(playerBoomJumpWaitTime);//机器爆炸和动画同步
         Destroy(platformObject);
-        //playerAgent.enabled = true;
+
         Debug.Log("平台已销毁，玩家弹射动画开始！");
         //explodeBlocks.Explode();
     }
