@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+/*Set controller of button -By Kehao*/
 public class ButtonControl : MonoBehaviour
 {
     private NavMeshObstacle navMeshObstacle;
     public DoorControl doorControl;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Triggered when the player steps on the pedal
     void OnTriggerEnter(Collider other)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/*The base class of interactive logic -By Kehao*/
 public class InteractableObject : MonoBehaviour
 {
     public NavMeshAgent playerAgent;
@@ -40,6 +41,6 @@ public class InteractableObject : MonoBehaviour
     */
     protected virtual void Interact()
     {
-        Debug.Log("玩家产生互动！");
+        Debug.Log("Interactor with Player！");
     }
 }

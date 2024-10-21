@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Set Animation of door -By Kehao*/
 public class DoorControl : MonoBehaviour
 {
     private Animator animator;

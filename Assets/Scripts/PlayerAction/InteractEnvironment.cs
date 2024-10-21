@@ -84,7 +84,7 @@ public class PlayerInteract : InteractableObject
         yield return new WaitForSeconds(playerBoomJumpWaitTime);//Machine explosion and animation synchronization
         Destroy(platformObject);
         //playerAgent.enabled = true;
-        Debug.Log("平台已销毁，玩家弹射动画开始！");
+        Debug.Log("Plane was destroied！");
         //explodeBlocks.Explode();
     }
 }
