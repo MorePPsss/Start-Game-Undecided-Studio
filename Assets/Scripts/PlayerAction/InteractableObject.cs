@@ -10,12 +10,12 @@ public class InteractableObject : MonoBehaviour
     public void OnClick(NavMeshAgent playerAgent)
     {
         this.playerAgent = playerAgent;
-        /*Take two steps to get nearby+interact -By Kehao*/
-        //S1 nearby
+        /*分两步 来到附近 + 交互*/
+        //S1 移动
         playerAgent.SetDestination(transform.position);
-        //S2 interact
+        //S2 交互
 
-        //TODO Interaction with the environment!
+        //TODO 跟环境的互动！
     }
     // Start is called before the first frame update
     void Start()
@@ -35,9 +35,7 @@ public class InteractableObject : MonoBehaviour
             }
         }
     }
-    /*For subclasses, interaction should be rewritable for different types of items: 
-     installable items, objects that can affect the scene -By Kehao
-    */
+    /*互动对于子类来说是要可以重写的 针对不同的物品类型：可安装类型的物品、可作用于场景的物体*/
     protected virtual void Interact()
     {
         Debug.Log("玩家产生互动！");

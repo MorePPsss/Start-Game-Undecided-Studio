@@ -7,11 +7,13 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    private NavMeshAgent playerAgent;
-    private Animator playerAnimator;
-    private OffMeshLink[] offMeshLinks;
+    private NavMeshAgent playerAgent; // 玩家角色的 NavMesh Agent
+    private Animator playerAnimator; //玩家角色的Animator
+    private OffMeshLink[] offMeshLinks; // 场景中所有的offMesh link
     [SerializeField] private bool haveSpring = false; // TODO 玩家是否装备弹簧
     ItemUI item;
+    // Start is called before the first frame update
+
     void HandleOffMeshLink()
     {
         // 在玩家通过offmeshlink后直接传送回原位
@@ -22,26 +24,26 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        playerAgent = GetComponent<NavMeshAgent>();
+        playerAgent = GetComponent<NavMeshAgent>(); //获得NavMeshAgent组件
         playerAnimator = GetComponent<Animator>();
-        playerAnimator.enabled = false; //Disable the player's animation components at the beginning of the game to avoid movement failure!by-kehao
+        playerAnimator.enabled = false; //在游戏开始阶段禁用玩家的动画组件，避免移动失效！by-kehao
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))// Detect left mouse click -By Kehao
+        if (Input.GetMouseButtonDown(0))// 检测鼠标左键点击 by-kehao
         {
-            Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();
+            Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();// 获取当前的摄像机实例
             Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit; // Declare a RaycastHit variable to store ray results
+            RaycastHit hit; // 声明一个 RaycastHit 变量，准备存储射线结果
             bool isCollide = Physics.Raycast(ray, out hit);
             isSpring();
             if (isCollide)
             {
-                if(hit.collider.tag == Tag.GROUND || hit.collider.tag == Tag.BUTTON)
+                if(hit.collider.tag == Tag.GROUND)
                 {
-                    playerAgent.SetDestination(hit.point);//Call the SetDestination method to set the player's destination for movement -By Kehao
+                    playerAgent.SetDestination(hit.point);//调用SetDestination方法，设置玩家移动目的地 by-kehao
                 }
                 else if(hit.collider.tag == Tag.INTERACTABLE)
                 {
