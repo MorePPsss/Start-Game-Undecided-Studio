@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*This script controls the camera switching logic and is mounted under the CameraSwitcher game object -By Kehao*/
 public class CamerasControl : MonoBehaviour
 {
-    public static CamerasControl Instance { get; private set; }  // 相机单例实例
+    public static CamerasControl Instance { get; private set; }  // Camera singleton mode
 
     public Camera[] cameras;
     private int currentCameraIndex = 0;
-    private Camera currentCamera;  // 当前激活的摄像机
+    private Camera currentCamera;
 
     void Awake()
     {
-        // 确保只有一个实例存在
         if (Instance == null)
         {
             Instance = this;
@@ -23,7 +23,6 @@ public class CamerasControl : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < cameras.Length; i++)
@@ -33,7 +32,6 @@ public class CamerasControl : MonoBehaviour
         currentCamera = cameras[currentCameraIndex];
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Switch camera when the "C" key is pressed
@@ -44,20 +42,20 @@ public class CamerasControl : MonoBehaviour
     }
     void SwitchCamera()
     {
-        // 禁用当前摄像机
+        // Disable the current camera
         cameras[currentCameraIndex].gameObject.SetActive(false);
 
-        // 更新摄像机索引
+        // Update camera index
         currentCameraIndex = (currentCameraIndex + 1) % cameras.Length;
 
-        // 启用新的摄像机
+        // Enable new camera
         cameras[currentCameraIndex].gameObject.SetActive(true);
 
-        // 更新当前摄像机引用
+        // Update the current camera reference
         currentCamera = cameras[currentCameraIndex];
     }
 
-    // 提供获取当前摄像机的接口
+    // Provide an interface to obtain the current camera
     public Camera GetCurrentCamera()
     {
         return currentCamera;
