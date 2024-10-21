@@ -45,13 +45,13 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         //put item down, switch data
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            if(InventoryManager.Instance.CheckInActionUI(eventData.position) || InventoryManager.Instance.CheckInInventoryUI(eventData.position) || InventoryManager.Instance.CheckInEquipmentUI(eventData.position) )
+            if(InventoryManager.Instance.CheckInActionUI(eventData.position) || InventoryManager.Instance.CheckInInventoryUI(eventData.position) || InventoryManager.Instance.CheckInEquipmentUI(eventData.position) ) // check if mouse is inside one of the slot
             {
-                if (eventData.pointerEnter.gameObject.GetComponent<SlotHolder>())
+                if (eventData.pointerEnter.gameObject.GetComponent<SlotHolder>()) //check if the target position contains a slotholder
                     targetHolder = eventData.pointerEnter.gameObject.GetComponent<SlotHolder>();
                 else
-                    targetHolder = eventData.pointerEnter.gameObject.GetComponentInParent<SlotHolder>();
-                switch(targetHolder.slotType)
+                    targetHolder = eventData.pointerEnter.gameObject.GetComponentInParent<SlotHolder>();//if there is something over the slot, it will return an image, so to get the slotholder of the target slot, we go to parent.
+                switch(targetHolder.slotType)//Distinguishing slottype. For example, we don't want to place items that can't be equipped into the equipment slot.
                 {
                     case SlotType.BAG:
                         SwapItem();
@@ -67,7 +67,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                      break;
                 }
                 currentHolder.UpdateItem();
-                targetHolder.UpdateItem();
+                targetHolder.UpdateItem();// update 
             }
         }
         else
@@ -77,11 +77,11 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             
         }
 
-        transform.SetParent(InventoryManager.Instance.currentDrag.originalParent);
+        transform.SetParent(InventoryManager.Instance.currentDrag.originalParent); // return the slot of dragitem to it's original position
 
         RectTransform t = transform as RectTransform;
         t.offsetMax = -Vector2.one * 5;
-        t.offsetMin = Vector2.one * 5;
+        t.offsetMin = Vector2.one * 5; //fix offset
         
     }
 
@@ -104,27 +104,28 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             return;
         }
 
-        Vector3 dropposition = playerposition.Getposition();
-        GameObject obj = Instantiate(Dropitem.prefab,dropposition + Vector3.down * 1 , Quaternion.identity);
+        Vector3 dropposition = playerposition.Getposition(); //get player position ,and set it to dropposition
+        GameObject obj = Instantiate(Dropitem.prefab,dropposition + Vector3.down * 1 , Quaternion.identity); //instantiate an gameobject on dropposition
         var tempItem = currentHolder.itemUI.Bag.itemList[currentHolder.itemUI.Index];
-        tempItem.itemData = null;
+        tempItem.itemData = null; //remove it from database
     }
 
     public void SwapItem()
     {
-        var targetItem = targetHolder.itemUI.Bag.itemList[targetHolder.itemUI.Index];
-        var tempItem = currentHolder.itemUI.Bag.itemList[currentHolder.itemUI.Index];
+        var targetItem = targetHolder.itemUI.Bag.itemList[targetHolder.itemUI.Index];//get inventoryItem of targetItem from the itemList denpending on the Index;
+        var tempItem = currentHolder.itemUI.Bag.itemList[currentHolder.itemUI.Index];//get inventoryItem of the dragitem from the itemList denpending on the Index;
 
-        bool isSame = tempItem.itemData == targetItem.itemData;
+        bool isSame = tempItem.itemData == targetItem.itemData;//prepared for stackable item
+        //targetitem.amount += tempitem.amount;
 
         if (isSame)
         {
-            tempItem.itemData = null;
+            tempItem.itemData = null;// if it's stackable and same item, add amount should be on the next line,then destory the dragitem
         }
         else
         {
             currentHolder.itemUI.Bag.itemList[currentHolder.itemUI.Index] = targetItem;
-            targetHolder.itemUI.Bag.itemList[targetHolder.itemUI.Index] = tempItem;
+            targetHolder.itemUI.Bag.itemList[targetHolder.itemUI.Index] = tempItem; //swap item
         }
     }
 }

@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        bool InteractWithUI()
+        bool InteractWithUI()// is current click is on UI
         {
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             {
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        void isSpring()
+        void isSpring() // is spring equiped
         {
             if (InventoryManager.Instance.equipmentData.itemList[1].itemData != null)
                 haveSpring = true;

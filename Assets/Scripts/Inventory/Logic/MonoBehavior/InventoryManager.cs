@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*ʵ�ֱ�������&�Ƴ��߼�*/
+
 public class InventoryManager : MonoBehaviour
 {
-    //����ģʽ
+    
     public static InventoryManager Instance { get; private set; }
     private void Awake()
     {
@@ -51,7 +51,7 @@ public class InventoryManager : MonoBehaviour
 
     }
     #region 
-    public bool CheckInInventoryUI(Vector3 position)
+    public bool CheckInInventoryUI(Vector3 position) // check if the dragitem is on one of the inventory slot
     {
         for (int i = 0; i < InventoryUI.slotHolders.Length; i++)
         {
@@ -63,11 +63,11 @@ public class InventoryManager : MonoBehaviour
         }
         return false;
     }
-    public bool CheckInActionUI(Vector3 position)
+    public bool CheckInActionUI(Vector3 position) // check if the mouse is on one of the ActionBar slot
     {
         for (int i = 0; i < actionUI.slotHolders.Length; i++)
         {
-            RectTransform t = actionUI.slotHolders[i].transform as RectTransform;
+            RectTransform t = actionUI.slotHolders[i].transform as RectTransform; //get recttrabsform of slotholder
 
             if(RectTransformUtility.RectangleContainsScreenPoint(t,position))
             {
@@ -76,7 +76,7 @@ public class InventoryManager : MonoBehaviour
         }
         return false;
     }
-    public bool CheckInEquipmentUI(Vector3 position)
+    public bool CheckInEquipmentUI(Vector3 position) // check if the mouse is on one of the inventory slot
     {
         for (int i = 0; i < equipmentUI.slotHolders.Length; i++)
         {
@@ -96,4 +96,4 @@ public class InventoryManager : MonoBehaviour
 
 
 
-//����ʹ��
+

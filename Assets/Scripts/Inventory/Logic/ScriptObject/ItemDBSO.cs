@@ -8,7 +8,7 @@ public class ItemDBSO : ScriptableObject
 {
     public List<InventoryItem> itemList = new List<InventoryItem>();
 
-    public void AddItem(ItemSO newItemData)
+    public void AddItem(ItemSO newItemData) //add item to the list
     {
         bool found = false;
         for (int i = 0; i < itemList.Count; i++)

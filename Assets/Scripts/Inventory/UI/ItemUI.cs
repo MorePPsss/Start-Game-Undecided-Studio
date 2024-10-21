@@ -8,7 +8,7 @@ public class ItemUI : MonoBehaviour
    public Image icon = null;
    public ItemDBSO Bag { get; set; }
    public int Index { get; set; } = -1;
-    public ItemSO currentItem { get; private set; } // ÃÌº” currentItem  Ù–‘
+    public ItemSO currentItem { get; private set; } // add currentItem 
 
 
     public void SetupItemUI(ItemSO item)
@@ -16,7 +16,7 @@ public class ItemUI : MonoBehaviour
         currentItem = item;
         if (item != null)
         {
-            icon.sprite = item.icon;
+            icon.sprite = item.icon; //assign the icon
             icon.gameObject.SetActive(true);
         }
         else

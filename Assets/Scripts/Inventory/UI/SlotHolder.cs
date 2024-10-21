@@ -9,7 +9,7 @@ public class SlotHolder : MonoBehaviour
     public SlotType slotType;
     public ItemUI itemUI;
 
-    public void UpdateItem() //������ʾ
+    public void UpdateItem() //update the data, when equip a weapon or a feet on the bag, it should move from the database of bag to equipment database
     {
         switch(slotType)
         {
