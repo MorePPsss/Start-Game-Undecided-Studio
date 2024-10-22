@@ -24,7 +24,8 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         ResetBag();
-        SceneManager.LoadScene("Main");
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
 
     }
     public void ResetBag()
