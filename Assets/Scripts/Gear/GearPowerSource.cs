@@ -19,5 +19,6 @@ public class GearPowerSource : MonoBehaviour
             GetComponent<Gear>().UpdateLinearSpeed(linearSpeed, null);
             recordSpeed = linearSpeed;
         }
+        GetComponent<Gear>().UpdateLinearSpeed(linearSpeed, null);
     }
 }

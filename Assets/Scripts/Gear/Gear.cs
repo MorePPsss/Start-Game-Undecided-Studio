@@ -72,7 +72,7 @@ public class Gear : MonoBehaviour
         }
         for(int i = 0; i < connectGears.Count; i++)
         {
-            if (connectGears[i].linSpeed == 0 && speed != 0 && connectGears[i] != powerbyGear)
+            if (connectGears[i].linSpeed != speed && speed != 0 && connectGears[i] != powerbyGear)
             {
                 connectGears[i].UpdateLinearSpeed(-speed, this);
             }
