@@ -52,6 +52,10 @@ public class PlayerController : MonoBehaviour
                 {
                     hit.collider.GetComponent<InteractableObject>().OnClick(playerAgent);
                 }
+                else if (hit.collider.tag == Tag.GEAR)
+                {
+                    hit.collider.GetComponentInParent<GearMachineControl>().PickUpGear(hit.transform);
+                }
             }
         }
 

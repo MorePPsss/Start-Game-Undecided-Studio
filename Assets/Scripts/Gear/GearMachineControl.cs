@@ -7,6 +7,7 @@ public class GearMachineControl : MonoBehaviour
 {
     public Gear blockGear;
     public Gear powerSauseGear;
+    public Gear detectGear;
     public GameObject machine;
     public GameObject switchGear;
     public GameObject handGear;
@@ -27,6 +28,11 @@ public class GearMachineControl : MonoBehaviour
             powerSauseGear.GetComponent<GearPowerSource>().linearSpeed = 10;
         }
         if(pickingCoolDown >= 0) { pickingCoolDown -= Time.deltaTime; }
+        
+        if(detectGear.linSpeed > 4 && machine.transform.position.x < 4)
+        {
+            machine.transform.position += new Vector3(Time.deltaTime, 0, 0);
+        }
     }
     public bool FindBlockGear(Gear startGear, Gear targetGear)
     {

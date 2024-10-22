@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Gear : MonoBehaviour
 {
+    public bool isBlock = false;
     public float radius = 0.25f;
     public int numGearTeeth = 12;
     public GearAxis axis = null;
@@ -50,6 +51,10 @@ public class Gear : MonoBehaviour
         {
             ResizeGear();
             remRadius = radius;
+        }
+        if (isBlock)
+        {
+            linearSpeed = 0f;
         }
     }
     //根据radius改变齿轮大小
