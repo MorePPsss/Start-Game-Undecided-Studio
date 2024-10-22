@@ -8,16 +8,23 @@ public class Gear : MonoBehaviour
 {
     public float radius = 0.25f;
     public int numGearTeeth = 12;
+    public GearAxis axis = null;
+    public bool isPowerGear;
     private float remRadius = 0.25f;
     private List<Gear> connectGears = new List<Gear>();
     private float torque;
-    private float linearSpeed;//³İËÙ£ºÃ¿Ãë³İÊı
+    private float linearSpeed;              //é½¿é€Ÿï¼šæ¯ç§’é½¿æ•° Gear teeth speed: number of teeth per second
     private float maxGearRadius = 5;
     private Gear powerbyGear = null;
     public float linSpeed
     {
         get { return linearSpeed; }
     }
+    public List<Gear> conGears
+    {
+        get { return connectGears; }
+    }
+
     private void Update()
     {
         if(linearSpeed != 0)
@@ -30,7 +37,7 @@ public class Gear : MonoBehaviour
         if(powerbyGear != null)
         {
             float maxDistance = powerbyGear.radius + radius + 0.15f;
-            if ((powerbyGear.transform.position - transform.position).magnitude > maxDistance)
+            if (GearFlatVector(powerbyGear.transform, transform).magnitude > maxDistance || Mathf.Abs(powerbyGear.transform.position.y - transform.position.y) > 0.13f)
             {
                 GearDepart();
             }
@@ -45,16 +52,24 @@ public class Gear : MonoBehaviour
             remRadius = radius;
         }
     }
-    //¸ù¾İradius¸Ä±ä³İÂÖ´óĞ¡
+    //æ ¹æ®radiusæ”¹å˜é½¿è½®å¤§å°
+    //change gear scale according to radius
     private void ResizeGear()
     {
         transform.localScale = new Vector3(2 * radius, 0.05f, 2 * radius);
     }
-    //Á´Ê½¸üĞÂËùÓĞ£¨ÏàÁÚ£©³İÂÖÏßËÙ¶È£¬Ìí¼Ó³İÂÖµÄÊ±ºòµ÷ÓÃ¡£
+    //é“¾å¼æ›´æ–°æ‰€æœ‰ï¼ˆç›¸é‚»ï¼‰é½¿è½®çº¿é€Ÿåº¦ï¼Œæ·»åŠ é½¿è½®çš„æ—¶å€™è°ƒç”¨ã€‚
+    //chain update all nearby gear linearSpeed, called when gears update
     public void UpdateLinearSpeed(float speed, Gear powerGear)
     {
         linearSpeed = speed;
-        powerbyGear = powerGear;
+        if(speed != 0 && powerbyGear == null) 
+        { 
+            powerbyGear = powerGear;
+        }else if(speed == 0) 
+        { 
+            powerbyGear = null;
+        }
         for(int i = 0; i < connectGears.Count; i++)
         {
             if (connectGears[i].linSpeed == 0 && speed != 0 && connectGears[i] != powerbyGear)
@@ -63,7 +78,8 @@ public class Gear : MonoBehaviour
             }
         }
     }
-    //Íâ²¿Ìí¼ÓÏàÁÚ³İÂÖÊı¾İ
+    //å¤–éƒ¨æ·»åŠ ç›¸é‚»é½¿è½®æ•°æ®
+    //add nearby gear data
     public void AddConnectGear(Gear gearConnectTo)
     {
         bool isConnect = false;
@@ -74,12 +90,13 @@ public class Gear : MonoBehaviour
         if(!isConnect)
         { 
             connectGears.Add(gearConnectTo); 
-            if(gearConnectTo.linSpeed != 0 && powerbyGear != gearConnectTo)
+            if(gearConnectTo.linSpeed != 0 && powerbyGear != gearConnectTo && !isPowerGear)
             {
                 UpdateLinearSpeed(-gearConnectTo.linSpeed, gearConnectTo);
             }
         }
     }
+    //gear custom collision and connect nearby gears.
     private void NearbyGear()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2 * maxGearRadius);
@@ -89,10 +106,17 @@ public class Gear : MonoBehaviour
             {
                 Gear nearbyGear = collider.gameObject.GetComponent<Gear>();
                 if (nearbyGear == this) { break; }
+
                 float minDistance = nearbyGear.radius + radius + 0.05f;
-                if((collider.transform.position - transform.position).magnitude < minDistance)
+                if(GearFlatVector(collider.transform, transform).magnitude <= minDistance && Mathf.Abs(collider.transform.position.y - transform.position.y) < 0.13f)
                 {
-                    collider.transform.position = (collider.transform.position - transform.position).normalized * (minDistance + 0.01f) + transform.position;
+                    Vector2 gearMove = GearFlatVector(collider.transform, transform).normalized * (minDistance  - GearFlatVector(collider.transform, transform).magnitude);
+                    collider.transform.position = collider.transform.position + new Vector3(gearMove.x, 0, gearMove.y);
+                    AddConnectGear(nearbyGear);
+                    nearbyGear.AddConnectGear(this);
+                }
+                else if (GearFlatVector(collider.transform, transform).magnitude <= minDistance + 0.05f && Mathf.Abs(collider.transform.position.y - transform.position.y) < 0.13f)
+                {
                     AddConnectGear(nearbyGear);
                     nearbyGear.AddConnectGear(this);
                 }
@@ -104,5 +128,10 @@ public class Gear : MonoBehaviour
         powerbyGear.connectGears.Remove(this);
         connectGears.Remove(powerbyGear);
         UpdateLinearSpeed(0, null);
+    }
+    public Vector2 GearFlatVector(Transform gearA, Transform gearB)
+    {
+        Vector2 gear2DDistance = new Vector2(gearA.position.x - gearB.position.x, gearA.position.z - gearB.position.z);
+        return gear2DDistance;
     }
 }
