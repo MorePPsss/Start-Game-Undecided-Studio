@@ -28,5 +28,8 @@ public class InputManager : MonoBehaviour
         pauseAction = controls.FindAction("Pause");
         stageReloadAction = controls.FindAction("Stage Reload");
         cameraSwitchAction = controls.FindAction("Camera Switch");
+        pauseAction.Enable();
+        stageReloadAction.Enable();
+        cameraSwitchAction.Enable();
     }
 }
