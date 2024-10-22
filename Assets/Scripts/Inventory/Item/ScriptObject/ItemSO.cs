@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Properties;
-using UnityEditor.Playables;
 using UnityEngine;
 
 /*Create a ScriptObject for an item without mounting it to any game object -By Kehao

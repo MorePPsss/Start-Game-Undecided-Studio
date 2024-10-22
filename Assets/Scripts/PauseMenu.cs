@@ -23,7 +23,21 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
+        ResetBag();
         SceneManager.LoadScene("Main");
+
+    }
+    public void ResetBag()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            InventoryManager.Instance.equipmentData.itemList[i].itemData = null;
+            InventoryManager.Instance.InventoryData.itemList[i].itemData = null;
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            InventoryManager.Instance.actionData.itemList[i].itemData = null;
+        }
     }
     public void Resume()
     {
