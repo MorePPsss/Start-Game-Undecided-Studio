@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 149942248}
   - component: {fileID: 149942252}
   - component: {fileID: 149942253}
+  - component: {fileID: 149942254}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -761,6 +762,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &149942254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149942243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360dabc8b16f65f498df7b02bfe54791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAgent: {fileID: 0}
+  haveInteracted: 0
 --- !u!224 &210868806 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6296591460802284235, guid: 711881cdb9757c645b25cf0e3363d07a, type: 3}
@@ -2889,6 +2904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAgent: {fileID: 0}
+  haveInteracted: 0
   platformObject: {fileID: 1352021264}
   playerObject: {fileID: 149942243}
   playerBoomJumpWaitTime: 0.9
@@ -7653,7 +7669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9161342466821196670, guid: 132cd3b97085c58488e20c9bfafd55fd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.47
+      value: 2.82
       objectReference: {fileID: 0}
     - target: {fileID: 9161342466821196670, guid: 132cd3b97085c58488e20c9bfafd55fd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7661,7 +7677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9161342466821196670, guid: 132cd3b97085c58488e20c9bfafd55fd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.69
+      value: 5.12
       objectReference: {fileID: 0}
     - target: {fileID: 9161342466821196670, guid: 132cd3b97085c58488e20c9bfafd55fd, type: 3}
       propertyPath: m_LocalRotation.w

@@ -7,33 +7,38 @@ using UnityEngine.AI;
 public class InteractableObject : MonoBehaviour
 {
     public NavMeshAgent playerAgent;
-    private bool haveInteracted = false;
+    public bool haveInteracted = false;
+    private bool isMovingToInteract = false;
     public void OnClick(NavMeshAgent playerAgent)
     {
         this.playerAgent = playerAgent;
+        playerAgent.stoppingDistance = 2;
+        isMovingToInteract = true;
+        haveInteracted = false;
+
         /*Take two steps to get nearby+interact -By Kehao*/
         //S1 nearby
         playerAgent.SetDestination(transform.position);
         //S2 interact
-
         //TODO Interaction with the environment!
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        if (playerAgent != null && haveInteracted == false && playerAgent.pathPending == false)
+        if (playerAgent != null && isMovingToInteract && !haveInteracted && !playerAgent.pathPending)
         {
-            if (playerAgent.remainingDistance <= 1)
+            // 判断人物是否接近物体
+            if (playerAgent.remainingDistance <= playerAgent.stoppingDistance)
             {
                 Interact();
-                haveInteracted = true;
+                isMovingToInteract = false; // 完成交互后，取消交互移动状态
             }
+        }
+
+        // 当玩家点击其他地方，目标改变时，取消交互
+        if (playerAgent != null && playerAgent.remainingDistance > playerAgent.stoppingDistance && isMovingToInteract)
+        {
+            isMovingToInteract = false; // 取消交互移动状态
         }
     }
     /*For subclasses, interaction should be rewritable for different types of items: 

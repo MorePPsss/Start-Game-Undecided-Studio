@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent playerAgent;
     private Animator playerAnimator;
     private OffMeshLink[] offMeshLinks;
+    private InteractableObject interactableObject;
+
     public Vector3 Getposition()
     {
         return this.transform.position;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         playerAgent = GetComponent<NavMeshAgent>();
         playerAnimator = GetComponent<Animator>();
+        interactableObject = GetComponent<InteractableObject>();
         playerAnimator.enabled = false; //Disable the player's animation components at the beginning of the game to avoid movement failure!by-kehao
     }
 
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour
                 if(hit.collider.tag == Tag.GROUND || hit.collider.tag == Tag.BUTTON)
                 {
                     playerAgent.SetDestination(hit.point);//Call the SetDestination method to set the player's destination for movement -By Kehao
+
                 }
                 else if(hit.collider.tag == Tag.INTERACTABLE)
                 {
