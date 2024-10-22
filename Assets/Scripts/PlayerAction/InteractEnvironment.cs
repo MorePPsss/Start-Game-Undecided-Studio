@@ -81,7 +81,7 @@ public class PlayerInteract : InteractableObject
             playerAnimator.enabled = true;
             playerAnimator.SetBool("BoomJump", true);
         }
-        yield return new WaitForSeconds(playerBoomJumpWaitTime);//Machine explosion and animation synchronization
+        yield return new WaitForSeconds(playerBoomJumpWaitTime);//machine explosion and animation synchronization
         Destroy(platformObject);
         //playerAgent.enabled = true;
         Debug.Log("Plane was destroied£¡");
