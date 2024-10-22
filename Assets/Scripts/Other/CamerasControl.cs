@@ -35,7 +35,7 @@ public class CamerasControl : MonoBehaviour
     void Update()
     {
         // Switch camera when the "C" key is pressed
-        if (Input.GetKeyDown(KeyCode.C))
+        if (InputManager.instance.cameraSwitchAction.triggered)
         {
             SwitchCamera();
         }

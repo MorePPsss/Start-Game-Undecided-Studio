@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pausemMenuUI;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (InputManager.instance.pauseAction.triggered)
         {
             if (GameIsPaused)
             {
@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
             }
             else Pause();
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (InputManager.instance.stageReloadAction.triggered)
         {
             Restart();
         }
