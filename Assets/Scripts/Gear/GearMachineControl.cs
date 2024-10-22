@@ -14,6 +14,7 @@ public class GearMachineControl : MonoBehaviour
 
     private Gear pickedGear;
     private Vector3 pickedGearPosition;
+    private float pickingCoolDown = 0.8f;
     private void Update()
     {
         //Debug.Log(FindBlockGear(null, powerSauseGear));
@@ -25,6 +26,7 @@ public class GearMachineControl : MonoBehaviour
         {
             powerSauseGear.GetComponent<GearPowerSource>().linearSpeed = 10;
         }
+        if(pickingCoolDown >= 0) { pickingCoolDown -= Time.deltaTime; }
     }
     public bool FindBlockGear(Gear startGear, Gear targetGear)
     {
@@ -50,8 +52,13 @@ public class GearMachineControl : MonoBehaviour
         return found;
     }
     //Pick up gears, switch with the gears behind and place gear
-    public void PickUpGear(Transform gearTransform)
+    public int PickUpGear(Transform gearTransform)
     {
+        if(pickingCoolDown > 0)
+        {
+            return 0;
+        }
+        pickingCoolDown = 0.8f;
         GameObject player = GameObject.Find("Player");
         if(pickedGear != null)
         {
@@ -87,7 +94,6 @@ public class GearMachineControl : MonoBehaviour
         if (pickedGear != null)
         {
             float radius = pickedGear.radius;
-
             if (pickedGear.transform.name != "SwitchGear")
             {
                 handGear.transform.localScale = new Vector3(2 * radius, 0.05f, 2 * radius);
@@ -105,9 +111,12 @@ public class GearMachineControl : MonoBehaviour
         }
         else
         {
+            handGear.transform.parent = null;
+            handGear.transform.position = new Vector3(0.1f, -10f, 0);
             handGearSwitch.transform.parent = null;
             handGearSwitch.transform.position = new Vector3(0.1f, -10f, 0);
         }
+        return 1;
     }
     private void CheckGearAxis(Gear clickGear)
     {
