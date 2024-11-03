@@ -6,7 +6,7 @@ using UnityEngine.AI;
 /*The script currently serves as a series of logic and animations generated for the interaction between players and the mechanisms in the environment -By Kehao
   TODO This part of the logic should be encapsulated later on
  */
-public class PlayerInteract : InteractableObject
+public class InteractEnvironment : InteractableObject
 {
     private Animator leverAnimator;
     private Animator platformAnimator;
@@ -15,6 +15,7 @@ public class PlayerInteract : InteractableObject
 
     public GameObject platformObject;
     public GameObject playerObject;
+    public NavMeshAgent playerAgent;
     public float playerBoomJumpWaitTime;// This variable also tries to synchronize with the player's ejection animation playback as much as possible when the machine explodes -By Kehao
     //public ExplodeBlocks explodeBlocks;
 
@@ -28,6 +29,7 @@ public class PlayerInteract : InteractableObject
         leverAnimator.SetBool("Pull", true);
         if (!isLeverPulled)
         {
+            Debug.Log("À­ÏÂÀ­¸Ë");
             StartCoroutine(WaitForLeverAnimation());
             isLeverPulled = true;
         }
@@ -72,18 +74,16 @@ public class PlayerInteract : InteractableObject
         /*Adjust player orientation£º
          In order to ensure that the landing point of the player's ejection due to the explosion of the machine is correct -By Kehao
          */
-        Quaternion currentRotation = playerObject.transform.rotation;
         playerObject.transform.rotation = Quaternion.LookRotation(Vector3.forward);
-        playerAgent.enabled = false;// Temporarily disable NavMeshAgent to prevent it from interfering with animations
-
         if (playerObject.transform.position.y > 1)
         {
+            playerAgent.enabled = false;// Temporarily disable NavMeshAgent to prevent it from interfering with animations
             playerAnimator.enabled = true;
             playerAnimator.SetBool("BoomJump", true);
         }
         yield return new WaitForSeconds(playerBoomJumpWaitTime);//machine explosion and animation synchronization
         Destroy(platformObject);
-        //playerAgent.enabled = true;
+        playerAgent.enabled = true;
         Debug.Log("Plane was destroied£¡");
         //explodeBlocks.Explode();
     }

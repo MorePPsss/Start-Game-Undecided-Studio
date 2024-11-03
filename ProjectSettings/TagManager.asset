@@ -8,7 +8,8 @@ TagManager:
   - Interactable
   - Pickable
   - Gear
-  - button
+  - Enemy
+  - Button
   layers:
   - Default
   - TransparentFX

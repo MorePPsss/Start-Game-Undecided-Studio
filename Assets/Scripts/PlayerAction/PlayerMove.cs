@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     private NavMeshAgent playerAgent;
     private Animator playerAnimator;

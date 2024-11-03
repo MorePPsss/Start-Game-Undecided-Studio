@@ -8,17 +8,20 @@ public class PauseMenu : MonoBehaviour
     public GameObject pausemMenuUI;
     void Update()
     {
-        if (InputManager.instance.pauseAction.triggered)
+        if(InputManager.instance != null)//Add one more if judgement to avoid always reporting errors if we don't enter program from Menu Scene -By Kehao
         {
-            if (GameIsPaused)
+            if (InputManager.instance.pauseAction.triggered)
             {
-                Resume();
+                if (GameIsPaused)
+                {
+                    Resume();
+                }
+                else Pause();
             }
-            else Pause();
-        }
-        if (InputManager.instance.stageReloadAction.triggered)
-        {
-            Restart();
+            if (InputManager.instance.stageReloadAction.triggered)
+            {
+                Restart();
+            }
         }
     }
     public void Restart()

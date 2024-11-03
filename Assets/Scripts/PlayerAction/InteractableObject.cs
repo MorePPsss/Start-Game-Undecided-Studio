@@ -8,12 +8,10 @@ public class InteractableObject : MonoBehaviour
 {
     public NavMeshAgent playerAgent;
     public bool haveInteracted = false;
-    private bool isMovingToInteract = false;
     public void OnClick(NavMeshAgent playerAgent)
     {
         this.playerAgent = playerAgent;
-        playerAgent.stoppingDistance = 2;
-        isMovingToInteract = true;
+        playerAgent.stoppingDistance = 1.5f;
         haveInteracted = false;
 
         /*Take two steps to get nearby+interact -By Kehao*/
@@ -25,20 +23,13 @@ public class InteractableObject : MonoBehaviour
 
     void Update()
     {
-        if (playerAgent != null && isMovingToInteract && !haveInteracted && !playerAgent.pathPending)
+        if (playerAgent != null && !haveInteracted && !playerAgent.pathPending)
         {
             // 判断人物是否接近物体
-            if (playerAgent.remainingDistance <= playerAgent.stoppingDistance)
+            if (Vector3.Distance(playerAgent.transform.position, transform.position) <= playerAgent.stoppingDistance)
             {
                 Interact();
-                isMovingToInteract = false; // 完成交互后，取消交互移动状态
             }
-        }
-
-        // 当玩家点击其他地方，目标改变时，取消交互
-        if (playerAgent != null && playerAgent.remainingDistance > playerAgent.stoppingDistance && isMovingToInteract)
-        {
-            isMovingToInteract = false; // 取消交互移动状态
         }
     }
     /*For subclasses, interaction should be rewritable for different types of items: 
