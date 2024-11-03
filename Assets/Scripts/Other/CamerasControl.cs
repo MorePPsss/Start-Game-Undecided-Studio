@@ -34,13 +34,17 @@ public class CamerasControl : MonoBehaviour
 
     void Update()
     {
-        if(InputManager.instance!=null)//Add one more if judgement to avoid always reporting errors if we don't enter program from Menu Scene -By Kehao
+        if(InputManager.instance != null )//Add one more if judgement to avoid always reporting errors if we don't enter program from Menu Scene -By Kehao
         {
             // Switch camera when the "C" key is pressed
             if (InputManager.instance.cameraSwitchAction.triggered)
             {
                 SwitchCamera();
             }
+        }
+        else
+        {
+            Debug.Log("Please Check InputManager(A gameObject in Menu scene) is added into this scene! -By Kehao");
         }
     }
     void SwitchCamera()

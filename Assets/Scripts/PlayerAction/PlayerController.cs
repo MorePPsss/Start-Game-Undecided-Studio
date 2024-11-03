@@ -6,12 +6,14 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 
-public class PlayerMove : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent playerAgent;
     private Animator playerAnimator;
     private OffMeshLink[] offMeshLinks;
     private InteractableObject interactableObject;
+    public GameObject baitPrefab;
+
 
     public Vector3 Getposition()
     {
@@ -50,9 +52,8 @@ public class PlayerMove : MonoBehaviour
                 if(hit.collider.tag == Tag.GROUND || hit.collider.tag == Tag.BUTTON)
                 {
                     playerAgent.SetDestination(hit.point);//Call the SetDestination method to set the player's destination for movement -By Kehao
-
                 }
-                else if(hit.collider.tag == Tag.INTERACTABLE)
+                else if(hit.collider.tag == Tag.INTERACTABLE || hit.collider.tag == Tag.BAITITEM)
                 {
                     hit.collider.GetComponent<InteractableObject>().OnClick(playerAgent);
                 }
@@ -62,8 +63,24 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
+        else if (InputManager.instance.putBait.triggered)
+        {
+            if (InteractableObject.baitNum > 0)
+            {
+                Debug.Log("Put Bait！");
+                InteractableObject.baitNum -= 1;
+                Vector3 baitPosition = transform.position + transform.forward; // 2是距离玩家的偏移量
+                Instantiate(baitPrefab, baitPosition, Quaternion.identity);
+                //TODO:instantiate Bait Object
+            }
+            else
+            {
+                Debug.Log("Can not put Bait！");
+            }
+            
+        }
 
-        bool InteractWithUI()// is current click is on UI
+            bool InteractWithUI()// is current click is on UI
         {
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             {

@@ -8,6 +8,7 @@ public class InteractableObject : MonoBehaviour
 {
     public NavMeshAgent playerAgent;
     public bool haveInteracted = false;
+    public static int baitNum;// Using keyword'static', all object which need to modify this variable share a same count.
     public void OnClick(NavMeshAgent playerAgent)
     {
         this.playerAgent = playerAgent;

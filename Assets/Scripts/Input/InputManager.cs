@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     public InputAction pauseAction;
     public InputAction stageReloadAction;
     public InputAction cameraSwitchAction;
+    public InputAction putBait;
     private void Awake()
     {
         if (instance == null)
@@ -28,8 +29,10 @@ public class InputManager : MonoBehaviour
         pauseAction = controls.FindAction("Pause");
         stageReloadAction = controls.FindAction("Stage Reload");
         cameraSwitchAction = controls.FindAction("Camera Switch");
+        putBait = controls.FindAction("PutBait");
         pauseAction.Enable();
         stageReloadAction.Enable();
         cameraSwitchAction.Enable();
+        putBait.Enable();
     }
 }

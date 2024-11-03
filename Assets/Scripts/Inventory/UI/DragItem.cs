@@ -13,7 +13,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public GameObject item;
     public ItemSO Dropitem;
     public ItemDBSO inventoryData;
-    public PlayerMove playerposition;
+    public PlayerController playerposition;
 
     void Awake()
     {
