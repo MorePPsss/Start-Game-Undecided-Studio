@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private OffMeshLink[] offMeshLinks;
     private InteractableObject interactableObject;
     public GameObject baitPrefab;
-
+    private Vector3 hitPoint;
 
     public Vector3 Getposition()
     {
@@ -33,12 +33,16 @@ public class PlayerController : MonoBehaviour
         playerAgent = GetComponent<NavMeshAgent>();
         playerAnimator = GetComponent<Animator>();
         interactableObject = GetComponent<InteractableObject>();
-        playerAnimator.enabled = false; //Disable the player's animation components at the beginning of the game to avoid movement failure!by-kehao
+        playerAnimator.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(AnimationControl_WalktoStand())
+        {
+            playerAnimator.SetBool("isWalk", false);
+        }
         if (Input.GetMouseButtonDown(0))// Detect left mouse click -By Kehao
         {
             if (InteractWithUI()) return;
@@ -49,7 +53,9 @@ public class PlayerController : MonoBehaviour
             isSpring();
             if (isCollide)
             {
-                if(hit.collider.tag == Tag.GROUND || hit.collider.tag == Tag.BUTTON)
+                hitPoint = hit.point;
+                playerAnimator.SetBool("isWalk", true);
+                if (hit.collider.tag == Tag.GROUND || hit.collider.tag == Tag.BUTTON)
                 {
                     playerAgent.SetDestination(hit.point);//Call the SetDestination method to set the player's destination for movement -By Kehao
                 }
@@ -63,7 +69,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (InputManager.instance.putBait.triggered)
+        else if (InputManager.instance.putBait.triggered && InputManager.instance!=null)
         {
             if (InteractableObject.baitNum > 0)
             {
@@ -111,5 +117,14 @@ public class PlayerController : MonoBehaviour
         {
             playerAgent.autoTraverseOffMeshLink = true;
         }
+    }
+
+    bool AnimationControl_WalktoStand()
+    {
+        if (Vector3.Distance(playerAgent.transform.position, hitPoint) < 1)
+        {
+            return true;
+        }
+        return false;
     }
 }
