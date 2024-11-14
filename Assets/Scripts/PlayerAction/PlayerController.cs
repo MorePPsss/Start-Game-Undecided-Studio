@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 
 public class PlayerController : MonoBehaviour
@@ -43,11 +44,11 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("isWalk", false);
         }
-        if (Input.GetMouseButtonDown(0))// Detect left mouse click -By Kehao
+        if (Mouse.current.leftButton.isPressed)// Detect left mouse click -By Kehao
         {
             if (InteractWithUI()) return;
             Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();
-            Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = currentCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit; // Declare a RaycastHit variable to store ray results
             bool isCollide = Physics.Raycast(ray, out hit);
             isSpring();
