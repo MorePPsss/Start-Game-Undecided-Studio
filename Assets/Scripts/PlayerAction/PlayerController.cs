@@ -1,3 +1,4 @@
+using Cinemachine;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private InteractableObject interactableObject;
     public GameObject baitPrefab;
     private Vector3 hitPoint;
+    public Camera currentCamera; //For using VirtualCamera -By Kehao
 
     public Vector3 Getposition()
     {
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
         if (Mouse.current.leftButton.isPressed)// Detect left mouse click -By Kehao
         {
             if (InteractWithUI()) return;
-            Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();
+            //Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();
             Ray ray = currentCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit; // Declare a RaycastHit variable to store ray results
             bool isCollide = Physics.Raycast(ray, out hit);
@@ -122,10 +124,16 @@ public class PlayerController : MonoBehaviour
 
     bool AnimationControl_WalktoStand()
     {
-        if (Vector3.Distance(playerAgent.transform.position, hitPoint) < 1)
+        // 检查路径是否已经计算完成，以及剩余距离是否小于停止范围
+        if (!playerAgent.pathPending && playerAgent.remainingDistance <= playerAgent.stoppingDistance)
         {
-            return true;
+            // 如果有剩余距离但角色接近目标位置，判断角色是否已经停止
+            if (!playerAgent.hasPath || playerAgent.velocity.sqrMagnitude == 0f)
+            {
+                return true;
+            }
         }
         return false;
     }
+
 }
