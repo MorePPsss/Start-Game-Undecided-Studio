@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a0b9a8ef796769e428c9404a576bcaec
+timeCreated: 1445894843
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 48833
+  packageName: 'Basic UI Elements: Concrete'
+  packageVersion: 1.0
+  assetPath: Assets/DualCorStudios/BasicUIConcrete/Prefabs/InputField.prefab
+  uploadId: 88533

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fd43d3c7190aeb54a970044f38b9d192
+timeCreated: 1445894831
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 48833
+  packageName: 'Basic UI Elements: Concrete'
+  packageVersion: 1.0
+  assetPath: Assets/DualCorStudios/BasicUIConcrete/Prefabs/PauseButton.prefab
+  uploadId: 88533

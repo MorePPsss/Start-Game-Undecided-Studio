@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 221bfcd0a0338084695e029c658b23bb
+timeCreated: 1445894827
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 48833
+  packageName: 'Basic UI Elements: Concrete'
+  packageVersion: 1.0
+  assetPath: Assets/DualCorStudios/BasicUIConcrete/Prefabs/Cancel.prefab
+  uploadId: 88533

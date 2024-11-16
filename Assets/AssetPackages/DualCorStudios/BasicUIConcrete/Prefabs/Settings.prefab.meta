@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a4b93bb9abedc8e4894cfe6c0e190f6a
+timeCreated: 1445894839
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 48833
+  packageName: 'Basic UI Elements: Concrete'
+  packageVersion: 1.0
+  assetPath: Assets/DualCorStudios/BasicUIConcrete/Prefabs/Settings.prefab
+  uploadId: 88533

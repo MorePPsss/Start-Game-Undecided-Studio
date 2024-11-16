@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fe0169f7f59918940852b0b8f68a3357
+timeCreated: 1445894404
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 48833
+  packageName: 'Basic UI Elements: Concrete'
+  packageVersion: 1.0
+  assetPath: Assets/DualCorStudios/BasicUIConcrete/BasicConcreteUI.unity
+  uploadId: 88533

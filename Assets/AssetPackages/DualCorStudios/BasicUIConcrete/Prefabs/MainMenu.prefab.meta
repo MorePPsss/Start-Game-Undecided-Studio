@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c28991e1542f19546989d5741dc2b591
+timeCreated: 1445894819
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 48833
+  packageName: 'Basic UI Elements: Concrete'
+  packageVersion: 1.0
+  assetPath: Assets/DualCorStudios/BasicUIConcrete/Prefabs/MainMenu.prefab
+  uploadId: 88533
