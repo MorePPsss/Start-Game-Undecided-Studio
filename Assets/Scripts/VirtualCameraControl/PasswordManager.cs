@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // 如果使用TextMeshPro需要引入
+using TMPro;
+using Cinemachine;
+using System.Collections.Generic; // 如果使用TextMeshPro需要引入
+using System.Collections;
 
 public class PasswordManager : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class PasswordManager : MonoBehaviour
     public GameObject keyboardUI; // 键盘UI的父对象
     private string currentPassword = ""; // 当前输入的密码
     private Animator doorAnimator; // 门的动画控制器
+    public GameObject wallHasKeyboard;
 
     void Start()
     {
@@ -41,38 +45,44 @@ public class PasswordManager : MonoBehaviour
         // 验证密码
         if (currentPassword == correctPassword)
         {
+            InteractableObject interactableObject = wallHasKeyboard.GetComponent<InteractableObject>();
+            interactableObject.haveInteracted = true;
             Debug.Log("密码正确！门已打开。");
+            OnCloseButton();
             OpenDoor();
         }
         else
         {
             Debug.Log("密码错误！");
         }
-
         // 清空输入
         currentPassword = "";
         UpdatePasswordDisplay();
     }
 
+    public void OnCloseButton()
+    {
+        VirtualCameraCloseUp virtualCameraCloseUp = wallHasKeyboard.GetComponent<VirtualCameraCloseUp>();
+        virtualCameraCloseUp.defaultCamera.Priority = 11;
+        virtualCameraCloseUp.closeUpCamera.Priority = 0;
+        //keyboardUI.SetActive(false);  
+    }
+
     private void UpdatePasswordDisplay()
     {
-        // 更新密码显示（显示实际输入内容或用 '*' 替代）
         passwordDisplay.text = new string('*', currentPassword.Length);
     }
 
     private void OpenDoor()
     {
-        // 控制门打开（可以替换为你自己的实现逻辑）
         if (doorAnimator != null)
         {
-            doorAnimator.SetTrigger("PushButton"); // 假设动画中有一个名为"Open"的触发器
+            doorAnimator.SetTrigger("PushButton");
         }
         else
         {
             Debug.LogWarning("Door Animator not set or missing.");
         }
-
-        // 隐藏键盘UI
         keyboardUI.SetActive(false);
     }
 }

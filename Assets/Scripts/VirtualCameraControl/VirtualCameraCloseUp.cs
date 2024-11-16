@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VirtualCameraSwitcher : InteractableObject
+public class VirtualCameraCloseUp : InteractableObject
 {
     public CinemachineVirtualCamera defaultCamera; // 默认场景相机
     public CinemachineVirtualCamera closeUpCamera; // 特写相机
@@ -13,7 +13,6 @@ public class VirtualCameraSwitcher : InteractableObject
         if (other.CompareTag("Player") && !haveInteracted) // 确保是玩家进入范围
         {
             Interact();
-            haveInteracted = true;
         }
     }
     protected override void Interact()
