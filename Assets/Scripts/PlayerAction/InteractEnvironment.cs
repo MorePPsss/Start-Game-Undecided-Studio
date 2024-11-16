@@ -13,7 +13,7 @@ public class InteractEnvironment : InteractableObject
     private Animator playerAnimator;
     private bool isLeverPulled = false;
 
-    public GameObject platformObject;
+    public GameObject EnvironmentObject;
     public GameObject playerObject;
     public NavMeshAgent playerAgent;
     public float playerBoomJumpWaitTime;// This variable also tries to synchronize with the player's ejection animation playback as much as possible when the machine explodes -By Kehao
@@ -22,7 +22,7 @@ public class InteractEnvironment : InteractableObject
     protected override void Interact()
     {
         leverAnimator = GetComponent<Animator>();
-        platformAnimator = platformObject.GetComponent<Animator>();
+        platformAnimator = EnvironmentObject.GetComponent<Animator>();
         playerAnimator = playerObject.GetComponent<Animator>();
         playerAgent = playerObject.GetComponent<NavMeshAgent>();
 
@@ -82,7 +82,7 @@ public class InteractEnvironment : InteractableObject
             playerAnimator.SetBool("BoomJump", true);
         }
         yield return new WaitForSeconds(playerBoomJumpWaitTime);//machine explosion and animation synchronization
-        Destroy(platformObject);
+        Destroy(EnvironmentObject);
         playerAgent.enabled = true;
         Debug.Log("Plane was destroied£¡");
         //explodeBlocks.Explode();
