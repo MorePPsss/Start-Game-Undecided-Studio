@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fdfc3d3317400d4489a35355799b533c
+timeCreated: 1549685254
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 25800000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 139298
+  packageName: Metal Grids PBR
+  packageVersion: 1.0
+  assetPath: Assets/Metal_Grids_Textures/example_scene/LightingData.asset
+  uploadId: 524638

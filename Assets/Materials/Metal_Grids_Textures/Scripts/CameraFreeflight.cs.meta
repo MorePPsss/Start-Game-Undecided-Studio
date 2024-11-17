@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 6769d4ba82de62b4e9a4467422464f6a
+timeCreated: 1549685419
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 139298
+  packageName: Metal Grids PBR
+  packageVersion: 1.0
+  assetPath: Assets/Metal_Grids_Textures/Scripts/CameraFreeflight.cs
+  uploadId: 524638

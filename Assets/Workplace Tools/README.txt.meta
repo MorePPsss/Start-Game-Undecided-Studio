@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8b3cff15147656f4eaaa2adcc0eac842
+timeCreated: 1490211393
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86242
+  packageName: Workplace Tools
+  packageVersion: 1.2
+  assetPath: Assets/Workplace Tools/README.txt
+  uploadId: 291364

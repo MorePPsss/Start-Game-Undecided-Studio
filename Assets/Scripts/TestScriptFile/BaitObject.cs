@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaitObject : InteractableObject
 {
+
     protected override void Interact()
     {
         Destroy(this.gameObject);

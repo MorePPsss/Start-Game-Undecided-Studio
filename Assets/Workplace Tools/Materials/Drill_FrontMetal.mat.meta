@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3d98a726c138c0e4ca06e8bb759c3b0b
+timeCreated: 1491900851
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86242
+  packageName: Workplace Tools
+  packageVersion: 1.2
+  assetPath: Assets/Workplace Tools/Materials/Drill_FrontMetal.mat
+  uploadId: 291364

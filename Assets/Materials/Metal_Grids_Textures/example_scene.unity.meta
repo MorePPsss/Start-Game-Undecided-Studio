@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 71d783b08d0bd2642be9cef6808ecd02
+timeCreated: 1549685236
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 139298
+  packageName: Metal Grids PBR
+  packageVersion: 1.0
+  assetPath: Assets/Metal_Grids_Textures/example_scene.unity
+  uploadId: 524638

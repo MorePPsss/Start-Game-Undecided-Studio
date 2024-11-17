@@ -65,7 +65,7 @@ public class PasswordManager : MonoBehaviour
         VirtualCameraCloseUp virtualCameraCloseUp = wallHasKeyboard.GetComponent<VirtualCameraCloseUp>();
         virtualCameraCloseUp.defaultCamera.Priority = 11;
         virtualCameraCloseUp.closeUpCamera.Priority = 0;
-        //keyboardUI.SetActive(false);  
+        keyboardUI.SetActive(false);
     }
 
     private void UpdatePasswordDisplay()

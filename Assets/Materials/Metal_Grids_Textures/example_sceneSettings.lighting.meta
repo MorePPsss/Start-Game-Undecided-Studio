@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3f1d75335a1458d48801afd8bc129c9c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 139298
+  packageName: Metal Grids PBR
+  packageVersion: 1.0
+  assetPath: Assets/Metal_Grids_Textures/example_sceneSettings.lighting
+  uploadId: 524638

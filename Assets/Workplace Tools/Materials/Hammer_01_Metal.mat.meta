@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 65c946c3b2c1c6f4f92cdd1ef488f21f
+timeCreated: 1491900852
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86242
+  packageName: Workplace Tools
+  packageVersion: 1.2
+  assetPath: Assets/Workplace Tools/Materials/Hammer_01_Metal.mat
+  uploadId: 291364

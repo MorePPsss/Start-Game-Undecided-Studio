@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     private EnemyStates enemyStates;
     private NavMeshAgent enemyAgent;
     private GameObject attackTarget;
+    private GameObject baitTarget;
 
     [Header("Material Settings")]
     public Material normalMaterial;
@@ -94,6 +95,22 @@ public class EnemyController : MonoBehaviour
          returns an array containing all colliders that are in contact with or located inside a sphere
          */
         var colliders = Physics.OverlapSphere(transform.position, findRadius);
+
+        // 遍历检测到的对象
+        foreach (var target in colliders)
+        {
+            // 优先检测诱饵
+            if (target.CompareTag(Tag.BAITITEM))
+            {
+                baitTarget = target.gameObject;
+            }
+            // 检测玩家
+            else if (target.CompareTag(Tag.PLAYER))
+            {
+                attackTarget = target.gameObject;
+            }
+        }
+
         foreach (var target in colliders) 
         { 
             if(target.CompareTag(Tag.PLAYER))
@@ -112,7 +129,7 @@ public class EnemyController : MonoBehaviour
         if (!FindPlayer())
         {
             isFollow = false;
-            if(remainLookAtTime > 0)
+            if (remainLookAtTime > 0)
             {
                 enemyAgent.destination = transform.position;
                 remainLookAtTime -= Time.deltaTime;
@@ -120,6 +137,8 @@ public class EnemyController : MonoBehaviour
             else if(isGuard)
             {
                 enemyStates = EnemyStates.GUARD;
+                enemyRenderer.material = normalMaterial;
+                enemyAgent.destination = guardPos;
             }
             else
             {
@@ -134,6 +153,11 @@ public class EnemyController : MonoBehaviour
                 enemyRenderer.material = alertMaterial;
             }
             enemyAgent.destination = attackTarget.transform.position;
+        }
+        // 判断是否追上玩家
+        if (Vector3.Distance(transform.position, attackTarget.transform.position) <= 1.5f)
+        {
+            PlayerCaught();
         }
     }
 
@@ -175,5 +199,17 @@ public class EnemyController : MonoBehaviour
             isWalk = true;
             enemyAgent.destination = patrolPoint;
         }
+    }
+
+    void PlayerCaught()
+    {
+        Debug.Log("玩家被敌人抓住了！游戏失败！");
+
+        // 停止敌人移动
+        enemyAgent.isStopped = true;
+
+
+        // 触发玩家失败的逻辑
+        //GameManager.Instance.GameOver(); // 假设有一个 GameManager 来处理游戏结束
     }
 }

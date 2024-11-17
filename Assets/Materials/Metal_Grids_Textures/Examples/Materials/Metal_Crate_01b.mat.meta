@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ed3262ddcaa02614aa898da10e96cf98
+timeCreated: 1549684882
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 139298
+  packageName: Metal Grids PBR
+  packageVersion: 1.0
+  assetPath: Assets/Metal_Grids_Textures/Examples/Materials/Metal_Crate_01b.mat
+  uploadId: 524638

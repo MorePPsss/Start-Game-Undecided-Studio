@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7f9c4d5cfb251ef4e85f0f7c2dbafba2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 139298
+  packageName: Metal Grids PBR
+  packageVersion: 1.0
+  assetPath: Assets/Metal_Grids_Textures/Examples/Prefabs/metal_grid_01d.prefab
+  uploadId: 524638
