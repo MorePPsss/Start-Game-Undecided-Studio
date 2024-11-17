@@ -712,7 +712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b662f4caf60bfec4b91ac7ddf5c70fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baitPrefab: {fileID: 0}
+  baitPrefab: {fileID: 8006987686858120543, guid: fd7f89111390d2e48a95e0b17f9c79d3, type: 3}
+  currentCamera: {fileID: 2042329586}
   haveSpring: 1
 --- !u!95 &149942252
 Animator:
@@ -4353,6 +4354,118 @@ RectTransform:
   m_AnchoredPosition: {x: 400, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &973718041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 973718044}
+  - component: {fileID: 973718043}
+  - component: {fileID: 973718042}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &973718042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973718041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f48da168fe50d9a4492188d5b0627301, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &973718043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973718041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c270a5d997e8cb4da2e370355f0922e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controls: {fileID: -944628639613478452, guid: f48da168fe50d9a4492188d5b0627301, type: 3}
+  pauseAction:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4ba41a4b-61c2-46ac-b53a-2ae18869b322
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  stageReloadAction:
+    m_Name: Stage Reload
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7343a3df-bde8-42d4-a5f8-ccc2f0894bab
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  cameraSwitchAction:
+    m_Name: Camera Switch
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a62856f9-1518-42ed-b8d1-6ae9cf95ff9e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  putBait:
+    m_Name: Put Bait
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 756e9985-34e1-4f7e-b656-264005492a8d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+--- !u!4 &973718044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973718041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.233999, y: 2.9613113, z: -2.3329415}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &975446150
 GameObject:
   m_ObjectHideFlags: 0

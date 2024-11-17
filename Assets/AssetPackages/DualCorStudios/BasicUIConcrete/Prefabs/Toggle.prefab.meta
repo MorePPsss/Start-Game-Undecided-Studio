@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9ad8a11ff8b3d204c98394949c142822
+timeCreated: 1445894841
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 48833
+  packageName: 'Basic UI Elements: Concrete'
+  packageVersion: 1.0
+  assetPath: Assets/DualCorStudios/BasicUIConcrete/Prefabs/Toggle.prefab
+  uploadId: 88533

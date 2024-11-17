@@ -1,3 +1,4 @@
+using Cinemachine;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ public class PlayerController : MonoBehaviour
     private InteractableObject interactableObject;
     public GameObject baitPrefab;
     private Vector3 hitPoint;
+    public Camera currentCamera; //For using VirtualCamera -By Kehao
+    private const string IsWalk = "isWalk";
+    private const string Jump = "Jump";
+    private const string Landing = "Landing";
 
     public Vector3 Getposition()
     {
@@ -40,14 +45,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(AnimationControl_WalktoStand())
+        if (AnimationControl_WalktoStand())
         {
-            playerAnimator.SetBool("isWalk", false);
+            playerAnimator.SetBool(IsWalk, false);
         }
+
         if (Mouse.current.leftButton.isPressed)// Detect left mouse click -By Kehao
         {
             if (InteractWithUI()) return;
-            Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();
+            //Camera currentCamera = CamerasControl.Instance.GetCurrentCamera();
             Ray ray = currentCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit; // Declare a RaycastHit variable to store ray results
             bool isCollide = Physics.Raycast(ray, out hit);
@@ -55,7 +61,7 @@ public class PlayerController : MonoBehaviour
             if (isCollide)
             {
                 hitPoint = hit.point;
-                playerAnimator.SetBool("isWalk", true);
+                playerAnimator.SetBool(IsWalk, true);
                 if (hit.collider.tag == Tag.GROUND || hit.collider.tag == Tag.BUTTON)
                 {
                     playerAgent.SetDestination(hit.point);//Call the SetDestination method to set the player's destination for movement -By Kehao
@@ -70,6 +76,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
         else if (InputManager.instance.putBait.triggered && InputManager.instance!=null)
         {
             if (InteractableObject.baitNum > 0)
@@ -86,8 +93,17 @@ public class PlayerController : MonoBehaviour
             }
             
         }
+        if (playerAgent.isOnOffMeshLink)
+        {
+            //TODO: Jumping Animation
+            //StartCoroutine(HandleJump());
+        }
 
-            bool InteractWithUI()// is current click is on UI
+
+
+
+
+        bool InteractWithUI()// is current click is on UI
         {
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             {
@@ -103,7 +119,6 @@ public class PlayerController : MonoBehaviour
                 haveSpring = true;
             else
             haveSpring = false;
-            //Debug.Log(InventoryManager.Instance.equipmentData.itemList[0].itemData);
         }
 
         if (!haveSpring)
@@ -122,10 +137,66 @@ public class PlayerController : MonoBehaviour
 
     bool AnimationControl_WalktoStand()
     {
-        if (Vector3.Distance(playerAgent.transform.position, hitPoint) < 1)
+        // 检查路径是否已经计算完成，以及剩余距离是否小于停止范围
+        if (!playerAgent.pathPending && playerAgent.remainingDistance <= playerAgent.stoppingDistance)
         {
-            return true;
+            // 如果有剩余距离但角色接近目标位置，判断角色是否已经停止
+            if (!playerAgent.hasPath || playerAgent.velocity.sqrMagnitude == 0f)
+            {
+                return true;
+            }
         }
         return false;
     }
+
+    private IEnumerator HandleJump()
+    {
+        // 暂停 NavMeshAgent
+        playerAgent.isStopped = true;
+        playerAgent.updatePosition = false; // 禁用 NavMeshAgent 对位置的更新
+        playerAgent.updateRotation = false; // 禁用 NavMeshAgent 对旋转的更新
+
+        // 获取跳跃起点和终点
+        Vector3 startPosition = playerAgent.transform.position;
+        Vector3 endPosition = playerAgent.currentOffMeshLinkData.endPos + Vector3.up * playerAgent.baseOffset;
+        Quaternion lookRotation = Quaternion.LookRotation(endPosition - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+
+        // 播放跳跃动画
+        playerAnimator.SetTrigger(Jump);
+
+        // 假设跳跃动画持续 1 秒
+        float jumpDuration = 0.5f;
+        float elapsedTime = 0f;
+
+        // 跳跃过程
+        while (elapsedTime < jumpDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / jumpDuration;
+
+            // 平滑插值位置
+            Vector3 currentPosition = Vector3.Lerp(startPosition, endPosition, t);
+
+            // 添加抛物线高度
+            float height = Mathf.Sin(Mathf.PI * t) * 0.5f; // 调整跳跃高度
+            currentPosition.y += height;
+
+            // 更新角色位置
+            playerAgent.transform.position = currentPosition;
+
+            yield return null;
+        }
+        playerAnimator.SetTrigger(Landing);
+        // 确保跳跃完成时角色到达目标位置
+        playerAgent.transform.position = endPosition;
+
+        // 恢复 NavMeshAgent 的控制
+        playerAgent.CompleteOffMeshLink();
+        playerAgent.isStopped = false;
+        playerAgent.updatePosition = true;  // 恢复位置更新
+        playerAgent.updateRotation = true; // 恢复旋转更新
+        playerAnimator.SetBool(IsWalk, false);
+    }
+
 }

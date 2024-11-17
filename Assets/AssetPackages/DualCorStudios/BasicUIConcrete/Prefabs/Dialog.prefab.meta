@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 332b5aa19ba56184d8d61bc44067e3a7
+timeCreated: 1445894823
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 48833
+  packageName: 'Basic UI Elements: Concrete'
+  packageVersion: 1.0
+  assetPath: Assets/DualCorStudios/BasicUIConcrete/Prefabs/Dialog.prefab
+  uploadId: 88533

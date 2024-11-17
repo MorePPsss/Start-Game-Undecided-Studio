@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*Set Animation of door -By Kehao*/
+/*Set Animation of ControlledDoor -By Kehao*/
 public class DoorControl : MonoBehaviour
 {
     private Animator animator;
@@ -10,6 +10,6 @@ public class DoorControl : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         animator.SetTrigger("PushButton");
-        Debug.Log("Open the door!");
+        Debug.Log("Open the ControlledDoor!");
     }
 }

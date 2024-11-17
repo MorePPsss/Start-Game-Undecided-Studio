@@ -13,7 +13,6 @@ public class InteractableObject : MonoBehaviour
     {
         this.playerAgent = playerAgent;
         playerAgent.stoppingDistance = 1;
-        haveInteracted = false;
 
         /*Take two steps to get nearby+interact -By Kehao*/
         //S1 nearby
