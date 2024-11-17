@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent enemyAgent;
     private GameObject attackTarget;
     private GameObject baitTarget;
+    private GameObject playerTarget;
 
     [Header("Material Settings")]
     public Material normalMaterial;
@@ -107,18 +108,23 @@ public class EnemyController : MonoBehaviour
             // 检测玩家
             else if (target.CompareTag(Tag.PLAYER))
             {
-                attackTarget = target.gameObject;
+                playerTarget = target.gameObject;
             }
         }
 
-        foreach (var target in colliders) 
-        { 
-            if(target.CompareTag(Tag.PLAYER))
-            {
-                attackTarget = target.gameObject;
-                return true;
-            }
+        // 优先选择诱饵作为目标
+        if (baitTarget != null)
+        {
+            attackTarget = baitTarget;
+            return true;
         }
+        // 如果没有诱饵，选择玩家
+        else if (playerTarget != null)
+        {
+            attackTarget = playerTarget;
+            return true;
+        }
+
         return false;
     }
 
@@ -138,11 +144,11 @@ public class EnemyController : MonoBehaviour
             {
                 enemyStates = EnemyStates.GUARD;
                 enemyRenderer.material = normalMaterial;
-                enemyAgent.destination = guardPos;
+                enemyAgent.destination = guardPos; // Back to the guard position
             }
             else
             {
-                enemyStates = EnemyStates.PATROL;
+                enemyStates = EnemyStates.PATROL; // Switch to the patrol state
             }
         }
         else
@@ -152,12 +158,23 @@ public class EnemyController : MonoBehaviour
             {
                 enemyRenderer.material = alertMaterial;
             }
-            enemyAgent.destination = attackTarget.transform.position;
+            // 设置目标为当前检测到的目标（诱饵或玩家）
+            if (attackTarget != null)
+            {
+                enemyAgent.destination = attackTarget.transform.position;
+            }
         }
-        // 判断是否追上玩家
-        if (Vector3.Distance(transform.position, attackTarget.transform.position) <= 1.5f)
+        if (attackTarget != null && Vector3.Distance(transform.position, attackTarget.transform.position) <= 1.5f)
         {
-            PlayerCaught();
+            if (attackTarget.CompareTag(Tag.PLAYER))
+            {
+                PlayerCaught(); // 捕获玩家
+            }
+            else if (attackTarget.CompareTag(Tag.BAITITEM))
+            {
+                Destroy(attackTarget); // 销毁诱饵
+                attackTarget = null; // 清除当前目标
+            }
         }
     }
 
