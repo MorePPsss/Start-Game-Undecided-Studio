@@ -11713,6 +11713,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23000011785037814, guid: 3fe5e5b169873104ca3a52a601994ea5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4190bd2c1ca0e9844a0cc93a84d083c1, type: 2}
     - target: {fileID: 64000012805145678, guid: 3fe5e5b169873104ca3a52a601994ea5, type: 3}
       propertyPath: m_Convex
       value: 0
@@ -17490,9 +17494,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalMaterial: {fileID: 2100000, guid: d20aa2f0ac98ecf4b8b6fd223b67b5a4, type: 2}
   alertMaterial: {fileID: 2100000, guid: 06d59d9110d92e64eb44b126cdb00fd1, type: 2}
-  isGuard: 1
-  findRadius: 4.43
+  digestionMaterial: {fileID: 2100000, guid: 96b36635ff5f1da41bb76afc83ca2176, type: 2}
+  isGuard: 0
+  findRadius: 4.55
   lookAtTime: 3
+  digestionTime: 3
   patrolRange: 2
 --- !u!136 &2061665065
 CapsuleCollider:
@@ -18425,7 +18431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1545282854186352935, guid: fd7f89111390d2e48a95e0b17f9c79d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 8.78
       objectReference: {fileID: 0}
     - target: {fileID: 1545282854186352935, guid: fd7f89111390d2e48a95e0b17f9c79d3, type: 3}
       propertyPath: m_LocalRotation.w

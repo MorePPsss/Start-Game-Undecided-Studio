@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EnemyStates { GUARD, PATROL, CHASE, DEAD }
+public enum EnemyStates { GUARD, PATROL, CHASE, DEAD, DIGESTION }
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     [Header("Material Settings")]
     public Material normalMaterial;
     public Material alertMaterial;
+    public Material digestionMaterial;
     private Renderer enemyRenderer;
 
     [Header("Basic Settings")]
@@ -25,6 +26,7 @@ public class EnemyController : MonoBehaviour
     private float moveSpeed;//Record the Enemy's original speed
     public float lookAtTime;
     private float remainLookAtTime;
+    public float digestionTime;
 
     [Header("Patrol Range")]
     public float patrolRange;
@@ -35,6 +37,7 @@ public class EnemyController : MonoBehaviour
     private bool isChase;
     private bool isWalk;
     private bool isFollow;
+    private bool isDigestion;
 
     void Awake()
     {
@@ -86,6 +89,10 @@ public class EnemyController : MonoBehaviour
                 break;
             case EnemyStates.DEAD:
 
+                break;
+
+            case EnemyStates.DIGESTION:
+                DigestionBait();
                 break;
         }
     }
@@ -173,6 +180,7 @@ public class EnemyController : MonoBehaviour
             else if (attackTarget.CompareTag(Tag.BAITITEM))
             {
                 Destroy(attackTarget); // 销毁诱饵
+                enemyStates = EnemyStates.DIGESTION;
                 attackTarget = null; // 清除当前目标
             }
         }
@@ -228,5 +236,31 @@ public class EnemyController : MonoBehaviour
 
         // 触发玩家失败的逻辑
         //GameManager.Instance.GameOver(); // 假设有一个 GameManager 来处理游戏结束
+    }
+
+    void DigestionBait()
+    {
+        isDigestion = true;
+        if (digestionMaterial != null)
+        {
+            enemyRenderer.material = digestionMaterial;
+        }
+        if (digestionTime > 0)
+        {
+            digestionTime -= Time.deltaTime;
+        }
+        else
+        {
+            if (isGuard)
+            {
+                enemyStates = EnemyStates.GUARD;
+            }
+            else
+            {
+                enemyStates = EnemyStates.PATROL;
+            }
+            enemyAgent.destination = guardPos;
+            enemyRenderer.material = normalMaterial;
+        }
     }
 }
