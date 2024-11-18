@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f1006ddcd27b48459e948d8d9e21476, type: 3}
-  m_Name: GearBait
+  m_Name: New Item SO
   m_EditorClassIdentifier: 
-  id: 1
-  name: GearBait
+  id: 0
+  name: Bait
   itemType: 0
-  description: This seems to attract guard robots
+  description: 
   AbilityList: []
-  icon: {fileID: 21300000, guid: 2e7ac424d2d6fd9409c61113863dac08, type: 3}
+  icon: {fileID: 0}
   prefab: {fileID: 8006987686858120543, guid: fd7f89111390d2e48a95e0b17f9c79d3, type: 3}
   Equipment_prefab: {fileID: 0}

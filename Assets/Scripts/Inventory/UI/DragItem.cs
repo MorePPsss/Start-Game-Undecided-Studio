@@ -105,7 +105,9 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
 
         Vector3 dropposition = playerposition.Getposition(); //get player position ,and set it to dropposition
-        GameObject obj = Instantiate(Dropitem.prefab,dropposition + Vector3.down * 1 , Quaternion.identity); //instantiate an gameobject on dropposition
+            Debug.LogError(Dropitem.prefab);
+        
+        GameObject obj = Instantiate(Dropitem.prefab,dropposition + Vector3.up * 3 , Quaternion.identity); //instantiate an gameobject on dropposition
         var tempItem = currentHolder.itemUI.Bag.itemList[currentHolder.itemUI.Index];
         tempItem.itemData = null; //remove it from database
     }
