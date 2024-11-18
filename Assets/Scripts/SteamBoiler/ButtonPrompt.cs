@@ -6,11 +6,12 @@ public class ButtonPrompt : MonoBehaviour
     public GameObject promptUI;  
     public KeyCode interactKey = KeyCode.E; 
     private bool isPlayerNearby = false;
-    public PanelRise panelUD;
-    public PanelLR panelLR;
+    //public PanelRise panelUD;
+    //public PanelLR panelLR;
     public PanelR panelR;
+    public PanelL panelL;
 
-    public PlatformAttachAndMove attachAndMoveScript;
+
     private void Start()
     {
         if (promptUI != null)
@@ -48,21 +49,21 @@ public class ButtonPrompt : MonoBehaviour
 
         if (isPlayerNearby && Input.GetKeyDown(interactKey))
         {
-            if (panelUD != null)
+            /*if (panelUD != null)
             {
                 panelUD.StartRising();
             }
             if (panelLR != null)
             {
                 panelLR.StartMoving();
-            }
+            }*/
             if(panelR != null)
             {
                 panelR.StartMoving();
             }
-            if (attachAndMoveScript != null)
+            if (panelL != null)
             {
-                attachAndMoveScript.StartPlatformMove(); // 启动平台移动
+                panelL.StartMoving();
             }
             Interact();
         }
