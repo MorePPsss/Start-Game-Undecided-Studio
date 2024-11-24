@@ -120,9 +120,11 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         bool isSame = tempItem.itemData == targetItem.itemData;//prepared for stackable item
         //targetitem.amount += tempitem.amount;
 
-        if (isSame)
+        if (isSame && targetItem.itemData.stackable)
         {
+            targetItem.amount += tempItem.amount;
             tempItem.itemData = null;// if it's stackable and same item, add amount should be on the next line,then destory the dragitem
+            tempItem.amount = 0;
         }
         else
         {
