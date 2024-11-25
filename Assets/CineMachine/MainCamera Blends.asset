@@ -14,17 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: Virtual Camera_1
-    m_To: Virtual Camera_2(Close-up)
-    m_Blend:
-      m_Style: 1
-      m_Time: 1
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: Virtual Camera_1
     m_To: Virtual Camera_4
     m_Blend:
       m_Style: 0
@@ -40,17 +29,6 @@ MonoBehaviour:
     m_Blend:
       m_Style: 0
       m_Time: 2
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: Virtual Camera_2(Close-up)
-    m_To: Virtual Camera_1
-    m_Blend:
-      m_Style: 1
-      m_Time: 1
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
