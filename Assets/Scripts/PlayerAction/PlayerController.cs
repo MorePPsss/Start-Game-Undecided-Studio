@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         interactableObject = GetComponent<InteractableObject>();
         playerAnimator.enabled = true;
+        GameManager.Instance.SetPlayer(gameObject);
     }
 
     // Update is called once per frame
