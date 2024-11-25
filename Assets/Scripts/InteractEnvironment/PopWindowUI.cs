@@ -23,6 +23,7 @@ public class PopWindowUI : InteractableObject
     }
     protected override void Interact()
     {
+        haveInteracted = true;
         Show();
     }
 
@@ -35,13 +36,12 @@ public class PopWindowUI : InteractableObject
             return;
         }
         contentText.text = contentList[contentIndex];
-        Debug.Log("Next"); 
-
     }
 
     public void OnCloseButtonClick()
     {
-        Hide ();
+        haveInteracted = false;
+        Hide();
     }
 
     public void Show()

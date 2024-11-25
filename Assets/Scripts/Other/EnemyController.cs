@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public enum EnemyStates { GUARD, PATROL, CHASE, DEAD, DIGESTION }
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IEndGameObserver
 {
     private EnemyStates enemyStates;
     private NavMeshAgent enemyAgent;
@@ -38,6 +38,11 @@ public class EnemyController : MonoBehaviour
     private bool isWalk;
     private bool isFollow;
     private bool isDigestion;
+    private bool isDead;
+
+    private bool playerDead;
+
+    private Quaternion guardRotation;
 
     void Awake()
     {
@@ -46,6 +51,9 @@ public class EnemyController : MonoBehaviour
         moveSpeed = enemyAgent.speed;
         guardPos = transform.position;
         remainLookAtTime = lookAtTime;
+        guardRotation = transform.rotation;
+        isDead = false;
+        playerDead = false;
     }
     void Start()
     {
@@ -58,24 +66,46 @@ public class EnemyController : MonoBehaviour
             enemyStates = EnemyStates.PATROL;
             GetNewPatrolPoint();
         }
+        //FIXME：Scene changing need to be modified!
+        GameManager.Instance.AddObserver(this);
+    }
+
+    //会有空指针的报错！原因：没有找到GameManager，当场景加载出来，敌人也加载的时候就可以用了。
+    //可以先将敌人禁用，点击play，再启用敌人，就不会报错了。
+    //void OnEnable()
+    //{
+    //    GameManager.Instance.AddObserver(this);
+    //}
+
+    void OnDisable()
+    {
+        if (!GameManager.IsInitialized) return;
+        GameManager.Instance.RemoveObserver(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        SwitchStates();
+        if(!playerDead)
+        {
+            SwitchStates();
+        }
     }
 
     void SwitchStates()
     {
+        if (isDead)
+        {
+            enemyStates = EnemyStates.DEAD;
+        }
         if (FindPlayer())
         {
             enemyStates = EnemyStates.CHASE;
         }
-            switch (enemyStates)
+        switch (enemyStates)
         {
             case EnemyStates.GUARD:
-
+                BackToGuard();
                 break;
             case EnemyStates.PATROL:
                 Partrol();
@@ -88,7 +118,7 @@ public class EnemyController : MonoBehaviour
                 //TODO: Attack and Animation
                 break;
             case EnemyStates.DEAD:
-
+                Dead();
                 break;
 
             case EnemyStates.DIGESTION:
@@ -103,7 +133,8 @@ public class EnemyController : MonoBehaviour
          returns an array containing all colliders that are in contact with or located inside a sphere
          */
         var colliders = Physics.OverlapSphere(transform.position, findRadius);
-
+        baitTarget = null;
+        playerTarget = null;
         // 遍历检测到的对象
         foreach (var target in colliders)
         {
@@ -131,7 +162,6 @@ public class EnemyController : MonoBehaviour
             attackTarget = playerTarget;
             return true;
         }
-
         return false;
     }
 
@@ -262,5 +292,37 @@ public class EnemyController : MonoBehaviour
             enemyAgent.destination = guardPos;
             enemyRenderer.material = normalMaterial;
         }
+    }
+
+    void BackToGuard()
+    {
+        isChase = false;
+        if (transform.position != guardPos)
+        {
+            isWalk = true;
+            enemyAgent.isStopped = false;
+            enemyAgent.destination = guardPos;
+            if (Vector3.SqrMagnitude(guardPos - transform.position) <= enemyAgent.stoppingDistance)
+            {
+                isWalk = false;
+                transform.rotation = Quaternion.Lerp(transform.rotation, guardRotation, 0.01f);
+            }
+        }
+    }
+
+    void Dead()
+    {
+        Debug.Log("Enemy has been slained");
+    }
+
+    public void EndNotify()
+    {
+        //TODO: When player is dead, all of enemies will do the same thing
+        isChase = false;
+        isWalk = false;
+        attackTarget = null;
+        playerDead = true;
+        enemyRenderer.material = alertMaterial;
+        Debug.Log("玩家死亡！");
     }
 }
