@@ -46,17 +46,16 @@ public class PanelR : MonoBehaviour
 
         Vector3 targetPositionRight = originalPosition + Vector3.right * moveDistance;
 
-
+        // move right
         while (Vector3.Distance(transform.position, targetPositionRight) > 0.01f)
         {
             Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPositionRight, moveSpeed * Time.deltaTime);
             transform.position = newPosition;
 
-
+            // If the player is on a platform, use Warp to synchronize the player's position
             if (playerNavMeshAgent != null)
             {
-                Vector3 playerTargetPosition = newPosition + Vector3.right * 0.5f;
-                playerNavMeshAgent.SetDestination(playerTargetPosition); 
+                playerNavMeshAgent.Warp(newPosition); //Force syncing the player to the platform position
             }
 
             yield return null;
@@ -64,19 +63,24 @@ public class PanelR : MonoBehaviour
 
         yield return new WaitForSeconds(stayDuration);
 
+        // The platform returns to its original position
         while (Vector3.Distance(transform.position, originalPosition) > 0.01f)
         {
             Vector3 newPosition = Vector3.MoveTowards(transform.position, originalPosition, moveSpeed * Time.deltaTime);
             transform.position = newPosition;
 
+            // Syncing the player to the platform position
             if (playerNavMeshAgent != null)
             {
-                playerNavMeshAgent.SetDestination(transform.position); 
+                playerNavMeshAgent.Warp(newPosition); // Force syncing the player to the platform position
             }
 
             yield return null;
         }
-
+        if (playerNavMeshAgent != null)
+        {
+            playerNavMeshAgent.ResetPath();
+        }
         isMoving = false;
     }
 }
