@@ -18,8 +18,7 @@ public class VirtualCameraCloseUp : InteractableObject
     protected override void Interact()
     {
         // 切换到特写相机
-        defaultCamera.Priority = 0;
-        closeUpCamera.Priority = 11;
+        CineCameraSwitchManager.Instance.SwitchCamera(closeUpCamera);
         // 显示键盘UI
         keyboardUI.SetActive(true);
     }

@@ -14,6 +14,7 @@ public class PasswordManager : MonoBehaviour
     private string currentPassword = ""; // 当前输入的密码
     private Animator doorAnimator; // 门的动画控制器
     public GameObject wallHasKeyboard;
+    public CinemachineVirtualCamera defaultCamera; // 默认场景相机
 
     void Start()
     {
@@ -62,9 +63,10 @@ public class PasswordManager : MonoBehaviour
 
     public void OnCloseButton()
     {
-        VirtualCameraCloseUp virtualCameraCloseUp = wallHasKeyboard.GetComponent<VirtualCameraCloseUp>();
-        virtualCameraCloseUp.defaultCamera.Priority = 11;
-        virtualCameraCloseUp.closeUpCamera.Priority = 0;
+        //VirtualCameraCloseUp virtualCameraCloseUp = wallHasKeyboard.GetComponent<VirtualCameraCloseUp>();
+        //virtualCameraCloseUp.defaultCamera.Priority = 11;
+        //virtualCameraCloseUp.closeUpCamera.Priority = 0;
+        CineCameraSwitchManager.Instance.SwitchCamera(defaultCamera);
         keyboardUI.SetActive(false);
     }
 
