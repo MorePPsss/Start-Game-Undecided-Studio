@@ -5,6 +5,7 @@ public class CameraSwitcher : MonoBehaviour
 {
     public CinemachineVirtualCamera[] cameras; // 相机数组
     private int currentCameraIndex = 0;        // 当前激活相机的索引
+    public bool isRobotModeActive = false;    // 是否进入伴随机器人视角
 
     void Start()
     {
@@ -14,12 +15,15 @@ public class CameraSwitcher : MonoBehaviour
 
     void Update()
     {
-        // 按下 C 键时切换相机
-        if (Input.GetKeyDown(KeyCode.C))
+        if (!isRobotModeActive) // 如果未进入机器人模式，允许切换相机
         {
-            // 切换到下一个相机
-            currentCameraIndex = (currentCameraIndex + 1) % cameras.Length;
-            ActivateCamera(currentCameraIndex);
+            // 按下 C 键时切换相机
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                // 切换到下一个相机
+                currentCameraIndex = (currentCameraIndex + 1) % cameras.Length;
+                ActivateCamera(currentCameraIndex);
+            }
         }
     }
 
@@ -30,5 +34,31 @@ public class CameraSwitcher : MonoBehaviour
         {
             cameras[i].Priority = (i == index) ? 10 : 0; // 当前相机优先级设置为高，其他相机为低
         }
+    }
+    void ActivateCamera(CinemachineVirtualCamera targetCamera)
+    {
+        foreach (var camera in cameras)
+        {
+            camera.Priority = (camera == targetCamera) ? 10 : 0; // 切换到目标相机
+        }
+    }
+    void ActivateCamera(CinemachineFreeLook targetCamera)
+    {
+        foreach (var camera in cameras)
+        {
+            camera.Priority = (camera == targetCamera) ? 10 : 0; // 切换到目标相机
+        }
+    }
+
+    public void ActivateRobotMode(CinemachineVirtualCamera robotCamera)
+    {
+        isRobotModeActive = true; // 设置为机器人模式
+        ActivateCamera(robotCamera); // 切换到伴随机器人相机
+    }
+
+    public void ActivateRobotMode(CinemachineFreeLook robotCamera)
+    {
+        isRobotModeActive = true; // 设置为机器人模式
+        ActivateCamera(robotCamera); // 切换到伴随机器人相机
     }
 }

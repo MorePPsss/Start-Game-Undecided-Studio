@@ -15,6 +15,7 @@ public class PasswordManager : MonoBehaviour
     private Animator doorAnimator; // 门的动画控制器
     public GameObject wallHasKeyboard;
     public CinemachineVirtualCamera defaultCamera; // 默认场景相机
+    public CinemachineFreeLook followCamera; // 默认场景相机
 
     void Start()
     {
@@ -65,8 +66,17 @@ public class PasswordManager : MonoBehaviour
     {
         //VirtualCameraCloseUp virtualCameraCloseUp = wallHasKeyboard.GetComponent<VirtualCameraCloseUp>();
         //virtualCameraCloseUp.defaultCamera.Priority = 11;
-        //virtualCameraCloseUp.closeUpCamera.Priority = 0;
-        CineCameraSwitchManager.Instance.SwitchCamera(defaultCamera);
+        //virtualCameraCloseUp.followCamera.Priority = 0;
+        CameraSwitcher switcher = FindObjectOfType<CameraSwitcher>();
+        if(switcher.isRobotModeActive)
+        {
+            CineCameraSwitchManager.Instance.SwitchCamera(followCamera);
+        }
+        else
+        {
+            CineCameraSwitchManager.Instance.SwitchCamera(defaultCamera);
+        }
+        
         keyboardUI.SetActive(false);
     }
 

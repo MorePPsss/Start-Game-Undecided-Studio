@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class VirtualCameraCloseUp : InteractableObject
 {
-    public CinemachineVirtualCamera defaultCamera; // 默认场景相机
     public CinemachineVirtualCamera closeUpCamera; // 特写相机
     public GameObject keyboardUI; // 键盘UI
     void OnTriggerEnter(Collider other)
@@ -20,6 +19,9 @@ public class VirtualCameraCloseUp : InteractableObject
         // 切换到特写相机
         CineCameraSwitchManager.Instance.SwitchCamera(closeUpCamera);
         // 显示键盘UI
-        keyboardUI.SetActive(true);
+        if (keyboardUI != null)
+        {
+            keyboardUI.SetActive(true);
+        }
     }
 }

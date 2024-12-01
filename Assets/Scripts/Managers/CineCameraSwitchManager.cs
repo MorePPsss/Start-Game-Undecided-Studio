@@ -6,7 +6,7 @@ using UnityEngine;
 public class CineCameraSwitchManager : Singleton<CineCameraSwitchManager>
 {
     private CinemachineVirtualCamera activeCamera;// 当前活动摄像机
-                                                  
+
     public void SwitchCamera(CinemachineVirtualCamera newCamera)
     {
         if (activeCamera != null)
@@ -16,6 +16,14 @@ public class CineCameraSwitchManager : Singleton<CineCameraSwitchManager>
 
         activeCamera = newCamera;
         activeCamera.Priority = 10;
+    }
+    public void SwitchCamera(CinemachineFreeLook newCamera)
+    {
+        if (activeCamera != null)
+        {
+            activeCamera.Priority = 0;
+        }
+        newCamera.Priority = 10;
     }
 
     /*关闭所有摄像机（回到默认摄像机）*/
