@@ -64,9 +64,6 @@ public class PasswordManager : MonoBehaviour
 
     public void OnCloseButton()
     {
-        //VirtualCameraCloseUp virtualCameraCloseUp = wallHasKeyboard.GetComponent<VirtualCameraCloseUp>();
-        //virtualCameraCloseUp.defaultCamera.Priority = 11;
-        //virtualCameraCloseUp.followCamera.Priority = 0;
         CameraSwitcher switcher = FindObjectOfType<CameraSwitcher>();
         if(switcher.isRobotModeActive)
         {

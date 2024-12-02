@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    public GameObject gameOverUI; // 游戏结束的弹窗 UI
+
     private GameObject player; // 用于保存玩家对象的引用
+
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
-    public void GameOver()
+    public void GameOver(string deadType)
     {
         NotifyObserver();
-        gameOverUI.SetActive(true);
+        UIManager.Instance.popGameOverWindow_NoContinueButton(deadType);
     }
+    public void RestartGame()
+    {
+        // 重新加载当前场景
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+
     public GameObject GetPlayer()
     {
         if (player == null)

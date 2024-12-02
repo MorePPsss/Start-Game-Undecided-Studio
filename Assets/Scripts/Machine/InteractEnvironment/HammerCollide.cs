@@ -13,8 +13,7 @@ public class HammerCollide : MonoBehaviour
         else if (other.CompareTag(Tag.PLAYER))
         {
             //TODO: Game Over
-            GameManager.Instance.GameOver();
-
+            GameManager.Instance.GameOver(DeadType.Hammered);
         }
     }
 }

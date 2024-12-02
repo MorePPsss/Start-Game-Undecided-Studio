@@ -12,6 +12,9 @@ public class UIManager : Singleton<UIManager>
     public GameObject windowObject;
     private List<string> contentList;
     private int contentIndex = 0;
+    public GameObject gameOverUI; // ÓÎÏ·½áÊøµÄµ¯´° UI
+    private TextMeshProUGUI titleTest;
+    private TextMeshProUGUI contentTest;
 
     public void Show(string popWindowTitle, string[] content)
     {
@@ -45,4 +48,26 @@ public class UIManager : Singleton<UIManager>
         contentText.text = contentList[contentIndex];
     }
 
+    public void popGameOverWindow_NoContinueButton(string deadType)
+    {
+        titleTest = gameOverUI.transform.Find("Dialog/Title/Text_Title").GetComponent<TextMeshProUGUI>();
+        contentTest = gameOverUI.transform.Find("Dialog/Text_Content").GetComponent<TextMeshProUGUI>();
+        titleTest.text = "Game Over!";
+        switch (deadType)
+        {
+            case DeadType.Hammered:
+                contentTest.text = "Beware of the hammer!";
+                break;
+            case DeadType.Enemy:
+                contentTest.text = "Watch out the Enemy next time!";
+                break;
+            case DeadType.Burned:
+                contentTest.text = "Watch out the Fire next time!";
+                break;
+            default:
+                contentTest.text = "You died. Try again!";
+                break;
+        }
+        gameOverUI.SetActive(true);
+    }
 }
