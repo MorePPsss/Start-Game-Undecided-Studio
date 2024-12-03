@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068035ef9cb99a340acc795fcf85c254, type: 3}
   m_Name: Spring
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream:Assets/Game Data/Item Data/Spring.asset
+=======
+  itemList:
+  - itemData: {fileID: 11400000, guid: bb02f94d87d78d14785163b2d2a97ed7, type: 2}
+    amount: 3
+  - itemData: {fileID: 11400000, guid: b8f7ced54fb6e1b47902d31aa80e0be4, type: 2}
+    amount: 0
+>>>>>>> Stashed changes:Assets/Game Data/Inventory Data/Bag.asset
