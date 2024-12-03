@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Game Data/Item Data/Spring.asset.meta
 guid: 54c160b7dea57d941b0cd5cf799806bb
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
-========
-guid: 68a1e5973dfbdc649ab6101dfd09dc7d
-NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 15600000
->>>>>>>> Stashed changes:Assets/New Terrain 2.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
