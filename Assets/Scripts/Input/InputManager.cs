@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class InputManager : MonoBehaviour
 {
@@ -11,6 +12,18 @@ public class InputManager : MonoBehaviour
     public InputAction stageReloadAction;
     public InputAction cameraSwitchAction;
     public InputAction putBait;
+    public delegate void InputSpaceEventHandler(float space);
+    private InputSpaceEventHandler inputSpaceEventHandler;
+    public event InputSpaceEventHandler OnInputSpace
+    {
+        add{
+            inputSpaceEventHandler += value;
+        }
+        remove { 
+            inputSpaceEventHandler -= value;
+        }
+    }
+    public event Action<float, float> OnInputHorizontalOrVertical;
     private void Awake()
     {
         if (instance == null)
@@ -23,7 +36,18 @@ public class InputManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Update()
+    {
+        if (inputSpaceEventHandler != null)
+        {
+            inputSpaceEventHandler(Input.GetAxisRaw("Space"));
+        }
 
+        if (OnInputHorizontalOrVertical != null)
+        {
+            OnInputHorizontalOrVertical(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        }
+    }
     void Start()
     {
         pauseAction = controls.FindAction("Pause");
