@@ -25,10 +25,6 @@ public class MouseCursorController : MonoBehaviour
         };
     }
 
-    private void OnClick()
-    {
-        SetCursor(clickCursor);
-    }
     private void SetCursor(Texture2D cursorTexture)
     {
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);

@@ -26,8 +26,9 @@ public class JetpackagePhysic : MonoBehaviour
     {
         if(jetpackWorkingTime > 0)
         {
+            transform.rotation *= Quaternion.Euler(perturbation);
             Vector3 position = transform.GetChild(0).position;
-            force = transform.GetChild(0).up.normalized * 15 + perturbation;
+            force = transform.GetChild(0).up.normalized * 15;
             rb.AddForceAtPosition(force, position, forceMode);
             jetpackWorkingTime -= Time.deltaTime;
         }

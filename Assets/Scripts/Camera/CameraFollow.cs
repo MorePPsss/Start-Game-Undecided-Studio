@@ -21,6 +21,7 @@ public class CameraFollow : MonoBehaviour
         _camera = camerasControl.GetCurrentCamera();
         CameraFollowPlayer();
     }
+
     private void CameraFollowPlayer()
     {
         GameObject player = GameObject.Find("Player");
