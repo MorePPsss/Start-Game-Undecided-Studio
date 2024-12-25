@@ -6,10 +6,12 @@ using UnityEngine;
 public class CameraFlatMove : MonoBehaviour
 {
     GameObject player;
-    public float moveSpeed = 5f; 
-    public float smoothTime = 0.3f; 
+    public float moveSpeed = 80f; 
+    public float smoothTime = 0.12f; 
     private Vector3 velocity = Vector3.zero; 
+
     public bool follow;
+    public bool inZone;
     private void Start()
     {
         player = GameObject.Find("Player");
@@ -19,14 +21,16 @@ public class CameraFlatMove : MonoBehaviour
         if (follow)
         {
             CameraFollowPlayer();
+        }else
+        {
+            MovetoLevel1PresetPos();
         }
     }
     private void CameraFollowPlayer()
     {
         Vector3 targetPos = transform.position;
         targetPos.x = player.transform.position.x;
-        Vector3 target = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
-        transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
+        SetCameraPos(targetPos);
     }
     public void SetCameraPos(Vector3 pos)
     {
@@ -34,5 +38,25 @@ public class CameraFlatMove : MonoBehaviour
         Vector3 target = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
     }
-    
+    public void MovetoLevel1PresetPos()
+    {
+        Vector3 pos = new Vector3(-5.84f, 4.15f, -19.03f);
+        if (inZone)
+        {
+            pos.x *= 0.1f;
+            if(transform.position.x > 0)
+            {
+                pos.x = -pos.x;
+            }
+        }
+        else if (player.transform.position.x > 0)
+        {
+            pos.x = 5.84f;
+        }
+        if(player.transform.position.y > 4)
+        {
+            pos.y = 8.29f;
+        }
+        SetCameraPos(pos);
+    }
 }
