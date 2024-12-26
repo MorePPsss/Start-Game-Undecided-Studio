@@ -7,99 +7,134 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlaneController : MonoBehaviour
 {
-    public float moveSpeed = 60;
-    private float thrustInput;
+    public float moveSpeed = 0; // Initial speed of the plane
+    private float thrustInput; // Input value for thrust (forward/backward movement)
 
-    public float horizontalSpeed = 30;
-    public float verticalSpeed = 15;
-    private Vector3 steeringInput;
+    public float horizontalSpeed = 30; // Speed of horizontal rotation
+    public float verticalSpeed = 15; // Speed of vertical rotation
+    private Vector3 steeringInput; // Input values for steering (pitch, roll)
 
-    public float leanAmount_X = 90;
-    public float leanAmount_Y = 30;
+    public float leanAmount_X = 90; // Visual tilt amount on the X-axis
+    public float leanAmount_Y = 30; // Visual tilt amount on the Y-axis
 
-    public float steeringSmoothing = 1.5f;
-    private Vector3 rawInputSteering;
-    private Vector3 smoothInputSteering;
+    public float steeringSmoothing = 1.5f; // Smoothing factor for steering input
+    private Vector3 rawInputSteering; // Raw steering input from the player
+    private Vector3 smoothInputSteering; // Smoothed steering input
 
-    public float thrustSmoothing = 2;
-    private float rawInputThrust;
-    private float smoothInputThrust;
-    private Rigidbody rb;
-    public Transform model;
+    private Rigidbody rb; // Rigidbody component for physics-based movement
+    public Transform model; // Visual representation of the plane
 
     private void Awake()
     {
+        // Initialize the Rigidbody component
         rb = GetComponent<Rigidbody>();
-    }
 
-    private void OnEnable()
-    {
-        InputManager.instance.OnInputSpace += InputSpaceHandler;
-        InputManager.instance.OnInputHorizontalOrVertical += InputHorizontalOrVertical;
-    }
-
-    private void Update()
-    {
-        InputSmoothing();
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
-        Turn();
-    }
-
-    private void OnDisable()
-    {
-        InputManager.instance.OnInputSpace -= InputSpaceHandler;
-        InputManager.instance.OnInputHorizontalOrVertical -= InputHorizontalOrVertical;
+        // Subscribe to toggle speed event from InputManager
+        if (InputManager.instance != null)
+        {
+            InputManager.instance.OnToggleSpeed += ToggleSpeed;
+        }
     }
 
     private void OnDestroy()
     {
-        InputManager.instance.OnInputSpace -= InputSpaceHandler;
-        InputManager.instance.OnInputHorizontalOrVertical -= InputHorizontalOrVertical;
+        // Unsubscribe from toggle speed event to prevent memory leaks
+        if (InputManager.instance != null)
+        {
+            InputManager.instance.OnToggleSpeed -= ToggleSpeed;
+        }
     }
 
-    private void InputHorizontalOrVertical(float arg1, float arg2)
+    private void OnEnable()
     {
-        Vector2 rawInput = new Vector2(arg1, arg2);
-        rawInputSteering = new Vector3(rawInput.y, 0, -rawInput.x);
+        // Subscribe to input events from InputManager
+        if (InputManager.instance != null)
+        {
+            InputManager.instance.OnInputHorizontalOrVertical += HandleSteeringInput;
+            InputManager.instance.OnInputSpace += HandleThrustInput;
+        }
     }
 
-    private void InputSpaceHandler(float space)
+    private void OnDisable()
     {
-        rawInputThrust = space;
+        // Unsubscribe from input events
+        if (InputManager.instance != null)
+        {
+            InputManager.instance.OnInputHorizontalOrVertical -= HandleSteeringInput;
+            InputManager.instance.OnInputSpace -= HandleThrustInput;
+        }
     }
 
-    private void InputSmoothing()
+    private void Update()
     {
+        // Smooth out input values for better control
+        SmoothInputs();
+    }
+
+    private void FixedUpdate()
+    {
+        // Handle movement and turning physics
+        Move();
+        Turn();
+    }
+
+    private void HandleSteeringInput(float horizontal, float vertical)
+    {
+        // Convert horizontal and vertical inputs to a steering vector
+        rawInputSteering = new Vector3(vertical, 0, -horizontal);
+    }
+
+    private void HandleThrustInput(float thrust)
+    {
+        // Assign raw thrust input
+        thrustInput = thrust;
+    }
+
+    private void SmoothInputs()
+    {
+        // Smooth the steering input using Lerp
         smoothInputSteering = Vector3.Lerp(smoothInputSteering, rawInputSteering, Time.deltaTime * steeringSmoothing);
         steeringInput = smoothInputSteering;
-
-        smoothInputThrust = Mathf.Lerp(smoothInputThrust, rawInputThrust, Time.deltaTime *thrustSmoothing);
-        thrustInput = smoothInputThrust;
     }
 
-    #region move
     private void Move()
     {
-        rb.velocity = transform.forward * moveSpeed; // set rigidbody speed
+        // Apply forward velocity based on thrust input and move speed
+        Vector3 moveDirection = transform.forward * moveSpeed;
+        rb.velocity = moveDirection;
     }
-    #endregion
-    #region Turn
+
     private void Turn()
     {
-        Vector3 newTorque = new Vector3(steeringInput.x * horizontalSpeed, -steeringInput.z * verticalSpeed, 0); //set new Torque
-        rb.AddRelativeTorque(newTorque);
-        rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0)), 0.5f);
-        TurnModel();
+        // Calculate torque based on steering input
+        Vector3 torque = new Vector3(steeringInput.x * horizontalSpeed, -steeringInput.z * verticalSpeed, 0);
+        rb.AddRelativeTorque(torque);
+
+        // Smoothly correct the plane's roll (Z-axis rotation)
+        rb.rotation = Quaternion.Slerp(
+            rb.rotation,
+            Quaternion.Euler(new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0)),
+            Time.fixedDeltaTime * 2 // Adjust this factor for smoother roll correction
+        );
+
+        // Adjust the model's tilt for visual feedback
+        AdjustModelTilt();
     }
 
-    private void TurnModel()
+    private void AdjustModelTilt()
     {
-        model.localEulerAngles = new Vector3(steeringInput.x * leanAmount_Y, model.localEulerAngles.y, steeringInput.z * leanAmount_X);
+        // Tilt the plane model visually based on input
+        model.localEulerAngles = new Vector3(
+            steeringInput.x * leanAmount_Y,
+            model.localEulerAngles.y,
+            steeringInput.z * leanAmount_X
+        );
     }
-    #endregion
-}
 
+    private void ToggleSpeed()
+    {
+        // Toggle move speed between 10 and 0
+        moveSpeed = moveSpeed == 0 ? 10 : 0;
+        Debug.Log($"Move Speed Toggled: {moveSpeed}");
+    }
+}
