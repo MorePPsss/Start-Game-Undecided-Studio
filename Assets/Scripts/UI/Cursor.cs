@@ -15,12 +15,12 @@ public class MouseCursorController : MonoBehaviour
         SetCursor(defaultCursor);
         playerInput.UI.Click.performed += ctx =>
         {
-            Debug.Log("Pressed" + UnityEngine.InputSystem.Mouse.current.position.ReadValue());
+           // Debug.Log("Pressed" + UnityEngine.InputSystem.Mouse.current.position.ReadValue());
             SetCursor(clickCursor);
         };
         playerInput.UI.Release.performed += ctx =>
         {
-            Debug.Log("Release" + UnityEngine.InputSystem.Mouse.current.position.ReadValue());
+            //Debug.Log("Release" + UnityEngine.InputSystem.Mouse.current.position.ReadValue());
             SetCursor(defaultCursor);
         };
     }
