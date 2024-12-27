@@ -13,6 +13,10 @@ public class BurnedArea : MonoBehaviour
             isBurning = true;
             StartCoroutine(BurnPlayer(other.gameObject));
         }
+        else if(other.CompareTag(Tag.WATER))
+        {
+            Debug.Log("Ãð»ð£¡");
+        }
     }
     private void OnTriggerExit(Collider other)
     {

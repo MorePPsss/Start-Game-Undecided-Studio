@@ -12,4 +12,5 @@ public class Tag
     public const string BUTTON = "Button";
     public const string BAITITEM = "BaitItem";
     public const string ENEMY = "Enemy";
+    public const string WATER = "Water";
 }
