@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Rigidbody))]
@@ -23,6 +23,9 @@ public class PlaneController : MonoBehaviour
 
     private Rigidbody rb; // Rigidbody component for physics-based movement
     public Transform model; // Visual representation of the plane
+    public Text subtitleText; // UI Text for subtitles
+
+    private bool isCutscenePlaying = true; // Flag to disable player control during cutscene
 
     private void Awake()
     {
@@ -65,29 +68,46 @@ public class PlaneController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Start the opening cutscene
+        StartCoroutine(PlayOpeningCutscene());
+    }
+
     private void Update()
     {
-        // Smooth out input values for better control
-        SmoothInputs();
+        if (!isCutscenePlaying)
+        {
+            // Smooth out input values for better control
+            SmoothInputs();
+        }
     }
 
     private void FixedUpdate()
     {
-        // Handle movement and turning physics
+
+        // Allow movement and turning only after the cutscene
         Move();
         Turn();
+
     }
 
     private void HandleSteeringInput(float horizontal, float vertical)
     {
         // Convert horizontal and vertical inputs to a steering vector
-        rawInputSteering = new Vector3(vertical, 0, -horizontal);
+        if (!isCutscenePlaying) // Ignore inputs during the cutscene
+        {
+            rawInputSteering = new Vector3(vertical, 0, -horizontal);
+        }
     }
 
     private void HandleThrustInput(float thrust)
     {
-        // Assign raw thrust input
-        thrustInput = thrust;
+        // Assign thrust input
+        if (!isCutscenePlaying) // Ignore inputs during the cutscene
+        {
+            thrustInput = thrust;
+        }
     }
 
     private void SmoothInputs()
@@ -134,7 +154,63 @@ public class PlaneController : MonoBehaviour
     private void ToggleSpeed()
     {
         // Toggle move speed between 10 and 0
-        moveSpeed = moveSpeed == 0 ? 10 : 0;
-        Debug.Log($"Move Speed Toggled: {moveSpeed}");
+        if (!isCutscenePlaying) // Allow speed toggle only after the cutscene
+        {
+            moveSpeed = moveSpeed == 0 ? 10 : 0;
+            Debug.Log($"Move Speed Toggled: {moveSpeed}");
+        }
+    }
+
+    private IEnumerator PlayOpeningCutscene()
+    {
+        moveSpeed = 10; // Plane moves at speed 10
+        subtitleText.text = ""; // Clear any existing subtitle
+
+        // Display subtitles one by one
+        yield return ShowSubtitle("Hi, Commander. It seems you have reached the target area.", 3f);
+        yield return ShowSubtitle("There are four areas, get in there and .", 3f);
+        yield return ShowSubtitle("Good luck, pilot!", 3f);
+
+        // End cutscene
+        thrustInput = 0;
+        moveSpeed = 0;
+        isCutscenePlaying = false;
+        subtitleText.text = "";
+    }
+
+    private IEnumerator ShowSubtitle(string message, float duration)
+    {
+        if (subtitleText != null)
+        {
+            // Set the text for the subtitle
+            subtitleText.text = message;
+
+            // Optional: Add fade-in and fade-out effect
+            yield return FadeSubtitle(0, 1, 0.5f); // Fade-in over 0.5 seconds
+            yield return new WaitForSeconds(duration); // Wait for the subtitle duration
+            yield return FadeSubtitle(1, 0, 0.5f); // Fade-out over 0.5 seconds
+
+            subtitleText.text = ""; // Clear subtitle after fade-out
+        }
+    }
+
+    private IEnumerator FadeSubtitle(float startAlpha, float endAlpha, float duration)
+    {
+        CanvasGroup canvasGroup = subtitleText.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            Debug.LogWarning("CanvasGroup component missing on SubtitleText. Fading skipped.");
+            yield break;
+        }
+
+        float elapsed = 0;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            yield return null;
+        }
+        canvasGroup.alpha = endAlpha;
     }
 }
+
