@@ -13,7 +13,8 @@ public class GameManager : Singleton<GameManager>
     public void GameOver(string deadType)
     {
         NotifyObserver();
-        UIManager.Instance.popGameOverWindow_NoContinueButton(deadType);
+        Destroy(player);
+        UIManager.Instance.popGameOverWindow_NoContinueButton(deadType);//pop dead notification
     }
     public void RestartGame()
     {
