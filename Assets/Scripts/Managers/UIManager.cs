@@ -9,7 +9,11 @@ public class UIManager : Singleton<UIManager>
     [Header("Dialogue Detail")]
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contentText;
+
+    public TextMeshProUGUI tipContentText;
+
     public GameObject windowObject;
+    public GameObject tipUIObject;
     private List<string> contentList;
     private int contentIndex = 0;
     public GameObject gameOverUI; // ÓÎÏ·½áÊøµÄµ¯´° UI
@@ -26,9 +30,10 @@ public class UIManager : Singleton<UIManager>
         windowObject.SetActive(true);
     }
 
-    public void Show()
+    public void ShowTipUI(string tipContent)
     {
-        windowObject.SetActive(true);
+        tipContentText.text = tipContent;
+        tipUIObject.SetActive(true);
     }
 
     public void Hide()

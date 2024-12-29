@@ -15,7 +15,7 @@ public class PasswordManager : MonoBehaviour
     private Animator doorAnimator; // 门的动画控制器
     public GameObject wallHasKeyboard;
     public CinemachineVirtualCamera defaultCamera; // 默认场景相机
-    public CinemachineFreeLook followCamera; // 默认场景相机
+    public CinemachineFreeLook followCamera;
 
     void Start()
     {
