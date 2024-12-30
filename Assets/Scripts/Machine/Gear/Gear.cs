@@ -14,7 +14,7 @@ public class Gear : MonoBehaviour
     private float remRadius = 0.25f;
     private List<Gear> connectGears = new List<Gear>();
     private float torque;
-    private float linearSpeed;              //齿速：每秒齿数 Gear teeth speed: number of teeth per second
+    private float linearSpeed;              //Gear teeth speed: number of teeth per second
     private float maxGearRadius = 5;
     private Gear powerbyGear = null;
     public float linSpeed
@@ -57,13 +57,11 @@ public class Gear : MonoBehaviour
             linearSpeed = 0f;
         }
     }
-    //根据radius改变齿轮大小
     //change gear scale according to radius
     private void ResizeGear()
     {
         transform.localScale = new Vector3(2 * radius, 0.05f, 2 * radius);
     }
-    //链式更新所有（相邻）齿轮线速度，添加齿轮的时候调用。
     //chain update all nearby gear linearSpeed, called when gears update
     public void UpdateLinearSpeed(float speed, Gear powerGear)
     {
@@ -83,7 +81,6 @@ public class Gear : MonoBehaviour
             }
         }
     }
-    //外部添加相邻齿轮数据
     //add nearby gear data
     public void AddConnectGear(Gear gearConnectTo)
     {
