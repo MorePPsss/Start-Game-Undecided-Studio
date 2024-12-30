@@ -10,6 +10,5 @@ public class DoorControl : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         animator.SetTrigger("PushButton");
-        Debug.Log("Open the ControlledDoor!");
     }
 }
