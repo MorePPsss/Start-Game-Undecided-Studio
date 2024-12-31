@@ -98,9 +98,12 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         {
             enemyStates = EnemyStates.DEAD;
         }
-        if (FindPlayer())
+        if (enemyStates != EnemyStates.DIGESTION)
         {
-            enemyStates = EnemyStates.CHASE;
+            if (FindPlayer())
+            {
+                enemyStates = EnemyStates.CHASE;
+            }
         }
         switch (enemyStates)
         {
@@ -203,15 +206,16 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         }
         if (attackTarget != null && Vector3.Distance(transform.position, attackTarget.transform.position) <= 1.5f)
         {
-            if (attackTarget.CompareTag(Tag.PLAYER))
+            if (attackTarget.CompareTag(Tag.BAITITEM))
             {
-                PlayerCaught(); // 捕获玩家
-            }
-            else if (attackTarget.CompareTag(Tag.BAITITEM))
-            {
+                
                 Destroy(attackTarget); // 销毁诱饵
                 enemyStates = EnemyStates.DIGESTION;
                 attackTarget = null; // 清除当前目标
+            }
+            else if (attackTarget.CompareTag(Tag.PLAYER))
+            {
+                PlayerCaught(); // 捕获玩家
             }
         }
     }
@@ -265,7 +269,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
 
         // 触发玩家失败的逻辑
-        //GameManager.Instance.GameOver(); // 假设有一个 GameManager 来处理游戏结束
+        GameManager.Instance.GameOver(DeadType.Enemy);
     }
 
     void DigestionBait()
@@ -281,6 +285,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         }
         else
         {
+            isDigestion = false;
             if (isGuard)
             {
                 enemyStates = EnemyStates.GUARD;
