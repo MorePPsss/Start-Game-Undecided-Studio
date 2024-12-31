@@ -9,6 +9,6 @@ public class DoorControl : MonoBehaviour
     public void OpenDoor()
     {
         animator = GetComponent<Animator>();
-        animator.SetTrigger("PushButton");
+        animator.SetBool("PwdRight",true);
     }
 }

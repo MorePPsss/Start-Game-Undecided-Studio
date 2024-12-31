@@ -86,7 +86,7 @@ public class PasswordManager : MonoBehaviour
     {
         if (doorAnimator != null)
         {
-            doorAnimator.SetTrigger("PushButton");
+            doorAnimator.SetBool("PwdRight", true);
         }
         else
         {
