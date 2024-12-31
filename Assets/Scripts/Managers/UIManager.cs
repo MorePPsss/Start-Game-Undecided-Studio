@@ -6,20 +6,26 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    [Header("Dialogue Detail")]
+    [Header("UI TextDetail")]
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contentText;
-
     public TextMeshProUGUI tipContentText;
-
+    public TextMeshProUGUI cameraIndexText;
+    [Header("UI Objects")]
     public GameObject windowObject;
     public GameObject tipUIObject;
+    public GameObject gameOverUI; // 游戏结束的弹窗 UI
+    [Header("CameraInfo")]
+    public CameraSwitcher cameraSwitcher;
     private List<string> contentList;
     private int contentIndex = 0;
-    public GameObject gameOverUI; // 游戏结束的弹窗 UI
     private TextMeshProUGUI titleTest;
     private TextMeshProUGUI contentTest;
 
+    private void Update()
+    {
+        ShowCameraUI();
+    }
     public void Show(string popWindowTitle, string[] content)
     {
         nameText.text = popWindowTitle;
@@ -34,6 +40,14 @@ public class UIManager : Singleton<UIManager>
     {
         tipContentText.text = tipContent;
         tipUIObject.SetActive(true);
+    }
+
+    public void ShowCameraUI()
+    {
+        if (cameraSwitcher != null)
+        {
+            cameraIndexText.text = "Camera: " + cameraSwitcher.GetCurrentCameraIndex();
+        }
     }
 
     public void Hide()
