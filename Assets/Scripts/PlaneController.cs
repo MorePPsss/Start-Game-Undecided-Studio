@@ -168,8 +168,8 @@ public class PlaneController : MonoBehaviour
 
         // Display subtitles one by one
         yield return ShowSubtitle("Hi, Commander. It seems you have reached the target area.", 3f);
-        yield return ShowSubtitle("There are four areas, get in there and .", 3f);
-        yield return ShowSubtitle("Good luck, pilot!", 3f);
+        yield return ShowSubtitle("There are four areas, get in there and decoding the enemy's secrets.", 3f);
+        yield return ShowSubtitle("Good luck, commander!", 3f);
 
         // End cutscene
         thrustInput = 0;

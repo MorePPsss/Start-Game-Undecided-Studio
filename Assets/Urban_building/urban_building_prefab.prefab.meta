@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bde3690f12c28134387246395849a55a
+timeCreated: 1539270334
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130318
+  packageName: Urban building
+  packageVersion: 1.0
+  assetPath: Assets/Urban_building/urban_building_prefab.prefab
+  uploadId: 272185
