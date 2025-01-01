@@ -80,6 +80,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inetract"",
+                    ""type"": ""Button"",
+                    ""id"": ""df91aa72-1aed-47c3-ae37-ba01324cb392"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -179,6 +188,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Toggle Speed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ce5734e-09e8-4654-9cf7-145ad522c034"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Inetract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -712,6 +732,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_PutBait = m_Player.FindAction("PutBait", throwIfNotFound: true);
         m_Player_WASDMovement = m_Player.FindAction("WASDMovement", throwIfNotFound: true);
         m_Player_ToggleSpeed = m_Player.FindAction("Toggle Speed", throwIfNotFound: true);
+        m_Player_Inetract = m_Player.FindAction("Inetract", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -788,6 +809,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PutBait;
     private readonly InputAction m_Player_WASDMovement;
     private readonly InputAction m_Player_ToggleSpeed;
+    private readonly InputAction m_Player_Inetract;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -798,6 +820,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @PutBait => m_Wrapper.m_Player_PutBait;
         public InputAction @WASDMovement => m_Wrapper.m_Player_WASDMovement;
         public InputAction @ToggleSpeed => m_Wrapper.m_Player_ToggleSpeed;
+        public InputAction @Inetract => m_Wrapper.m_Player_Inetract;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -825,6 +848,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ToggleSpeed.started += instance.OnToggleSpeed;
             @ToggleSpeed.performed += instance.OnToggleSpeed;
             @ToggleSpeed.canceled += instance.OnToggleSpeed;
+            @Inetract.started += instance.OnInetract;
+            @Inetract.performed += instance.OnInetract;
+            @Inetract.canceled += instance.OnInetract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -847,6 +873,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ToggleSpeed.started -= instance.OnToggleSpeed;
             @ToggleSpeed.performed -= instance.OnToggleSpeed;
             @ToggleSpeed.canceled -= instance.OnToggleSpeed;
+            @Inetract.started -= instance.OnInetract;
+            @Inetract.performed -= instance.OnInetract;
+            @Inetract.canceled -= instance.OnInetract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1011,6 +1040,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnPutBait(InputAction.CallbackContext context);
         void OnWASDMovement(InputAction.CallbackContext context);
         void OnToggleSpeed(InputAction.CallbackContext context);
+        void OnInetract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

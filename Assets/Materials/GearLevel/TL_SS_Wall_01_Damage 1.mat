@@ -16,7 +16,7 @@ Material:
   - _NORMALMAP
   - _SPECULAR_COLOR
   m_InvalidKeywords: []
-  m_LightmapFlags: 1
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -29,10 +29,10 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: ff2d529f510c0e84cb1c76ed04a1a9bd, type: 3}
-        m_Scale: {x: 10, y: 10}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: 0.2, y: 0.2}
+        m_Offset: {x: 0.97, y: 0.12}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 21bc1f4f763f643499c74a8220514da9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6c4cf36f39a17bd45a7f1ace72ed294c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -41,8 +41,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: ff2d529f510c0e84cb1c76ed04a1a9bd, type: 3}
-        m_Scale: {x: 10, y: 10}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: 0.2, y: 0.2}
+        m_Offset: {x: 0.97, y: 0.12}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -74,7 +74,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Shininess: 0.15077275
-    - _Smoothness: 0.529
+    - _Smoothness: 0.711
     - _SmoothnessSource: 0
     - _SpecSource: 0
     - _SpecularHighlights: 0
@@ -83,10 +83,10 @@ Material:
     - _Surface: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
-    - _Color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
-    - _EmissionColor: {r: 0.06372372, g: 0.061409734, b: 0.066037714, a: 1}
-    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.529}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.676}
+    - _Color: {r: 1, g: 1, b: 1, a: 0.676}
+    - _EmissionColor: {r: 0.066037714, g: 0.05954074, b: 0.05954074, a: 1}
+    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.711}
   m_BuildTextureStacks: []
 --- !u!114 &663404526349556508
 MonoBehaviour:

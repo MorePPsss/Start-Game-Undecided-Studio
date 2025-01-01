@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Inetract",
+                    "type": "Button",
+                    "id": "df91aa72-1aed-47c3-ae37-ba01324cb392",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -157,6 +166,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Toggle Speed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ce5734e-09e8-4654-9cf7-145ad522c034",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Inetract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
