@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class CameraFlatMove : MonoBehaviour
 {
-    GameObject player;
+    
     public float moveSpeed = 80f; 
     public float smoothTime = 0.12f; 
     private Vector3 velocity = Vector3.zero; 
+    private GameObject player;
 
     public bool follow;
     public bool inZone;

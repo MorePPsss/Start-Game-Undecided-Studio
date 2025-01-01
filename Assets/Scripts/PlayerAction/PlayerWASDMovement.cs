@@ -13,10 +13,16 @@ public class PlayerWASDMovement : MonoBehaviour
     public float rotateSpeed = 1;
     public bool canTurn = true;
     public Vector3 holdDir = new Vector3(1, 0, 0);
+    public Vector3 moveDir
+    {
+        get { return Velocity; }
+    }
 
     [SerializeField]
     private Animator animator;
     private Rigidbody rb;
+    private Vector3 previousPos;
+    private Vector3 Velocity;
     private Vector3 inputMoveDir = Vector3.zero;
     //private PlayerInput playerInput;
 
@@ -54,6 +60,8 @@ public class PlayerWASDMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        Velocity = (rb.position - previousPos) / Time.fixedDeltaTime;
+        previousPos = rb.position;
     }
     private void Move()
     {

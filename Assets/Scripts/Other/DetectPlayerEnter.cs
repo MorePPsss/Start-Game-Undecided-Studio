@@ -19,10 +19,6 @@ public class DetectPlayerEnter : MonoBehaviour
     [SerializeField]
     private EventList eventlist;
 
-    private void Start()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Player")

@@ -5,14 +5,15 @@ using UnityEngine.InputSystem;
 
 public class HandleObject : MonoBehaviour
 {
+    public bool canInteract = false;
+
     [SerializeField]
     private Transform ConnectedObj;
     [SerializeField]
     private GameObject player;
-
     private PlayerInput playerInput;
-    public bool canInteract = false;
-    public bool isHold = false;
+    private bool isHold = false;
+    private Vector3 distance;
     private void Start()
     {
         player = GameObject.Find("Player");
@@ -29,23 +30,30 @@ public class HandleObject : MonoBehaviour
         if (canInteract)
         {
             playerInput.Enable();
+            if(isHold)
+            {
+                ConnectedObj.position += new Vector3(player.GetComponent<PlayerWASDMovement>().moveDir.x, 0, 0) * Time.deltaTime;
+            }
         }
         else
         {
             playerInput.Disable();
         }
     }
-    private void HandleInterct()
+    public void HandleInterct()
     {
         isHold = !isHold;
+        Rigidbody rigidbody = player.GetComponent<Rigidbody>();
         player.GetComponent<PlayerWASDMovement>().canTurn = !isHold;
+        GetComponent<MeshCollider>().enabled = !isHold;
         if (isHold)
         {
-            Rigidbody rigidbody = player.GetComponent<Rigidbody>();
+            player.GetComponent<PlayerWASDMovement>().moveSpeed = 1;
             rigidbody.constraints |= RigidbodyConstraints.FreezePositionZ;
+            distance = ConnectedObj.position - rigidbody.position;
         }else
         {
-            Rigidbody rigidbody = player.GetComponent<Rigidbody>();
+            player.GetComponent<PlayerWASDMovement>().moveSpeed = 2;
             rigidbody.constraints &= ~RigidbodyConstraints.FreezePositionZ;
         }
     }

@@ -1,29 +1,23 @@
 fileFormatVersion: 2
-guid: 447e97f44e7d0fd4eb6ddec82c319992
+guid: 9c0b20c650cfc1246a96e1333dcaedf7
 AudioImporter:
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   defaultSettings:
+    serializedVersion: 2
     loadType: 0
     sampleRateSetting: 0
     sampleRateOverride: 44100
     compressionFormat: 1
     quality: 1
     conversionMode: 0
+    preloadAudioData: 0
   platformSettingOverrides: {}
   forceToMono: 0
   normalize: 1
-  preloadAudioData: 1
   loadInBackground: 0
   ambisonic: 0
   3D: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 266226
-  packageName: Free Fire VFX - URP
-  packageVersion: 1.0.213
-  assetPath: Assets/Vefects/Free Fire VFX URP/Audio/SFX_FireBig_L.wav
-  uploadId: 705550
