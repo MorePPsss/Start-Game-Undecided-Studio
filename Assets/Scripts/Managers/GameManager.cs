@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
 {
 
     private GameObject player; // 用于保存玩家对象的引用
+    public static bool ifFirstTimeGetBait = true;
 
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
     public void GameOver(string deadType)
@@ -19,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     public void RestartGame()
     {
         // 重新加载当前场景
+        InteractableObject.baitNum = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

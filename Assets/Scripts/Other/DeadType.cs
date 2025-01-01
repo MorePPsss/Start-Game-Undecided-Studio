@@ -5,6 +5,6 @@ using UnityEngine;
 public class DeadType
 {
     public const string Burned = "Burned";
-    public const string Hammered = "Hammered";
+    public const string Trap = "Trap";
     public const string Enemy = "Enemy";
 }
