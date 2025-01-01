@@ -21,6 +21,8 @@ public class UIManager : Singleton<UIManager>
     private int contentIndex = 0;
     private TextMeshProUGUI titleTest;
     private TextMeshProUGUI contentTest;
+    [Header("TipUI SettingDetail")]
+    public float tipRemainingTime;
 
     private void Update()
     {
@@ -40,6 +42,11 @@ public class UIManager : Singleton<UIManager>
     {
         tipContentText.text = tipContent;
         tipUIObject.SetActive(true);
+        StartCoroutine(HideTipAfterSeconds(tipRemainingTime));
+    }
+    public void HideTipUI()
+    {
+        tipUIObject.SetActive(false);
     }
 
     public void ShowCameraUI()
@@ -50,7 +57,7 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public void Hide()
+    public void HideWindowUI()
     {
         windowObject.SetActive(false);
     }
@@ -61,7 +68,7 @@ public class UIManager : Singleton<UIManager>
         if (contentIndex >= contentList.Count)
         {
             //UIManager.Instance.CloseWindow("TipWindow");
-            Hide();
+            HideWindowUI();
             return;
         }
         contentText.text = contentList[contentIndex];
@@ -74,8 +81,8 @@ public class UIManager : Singleton<UIManager>
         titleTest.text = "Game Over!";
         switch (deadType)
         {
-            case DeadType.Hammered:
-                contentTest.text = "Beware of the hammer!";
+            case DeadType.Trap:
+                contentTest.text = "Beware of the Trap!";
                 break;
             case DeadType.Enemy:
                 contentTest.text = "Watch out the Enemy next time!";
@@ -88,5 +95,11 @@ public class UIManager : Singleton<UIManager>
                 break;
         }
         gameOverUI.SetActive(true);
+    }
+
+    private IEnumerator HideTipAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        UIManager.Instance.HideTipUI();
     }
 }

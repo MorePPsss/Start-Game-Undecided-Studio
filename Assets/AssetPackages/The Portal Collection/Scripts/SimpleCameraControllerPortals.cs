@@ -126,7 +126,7 @@ namespace UnityTemplateProjects
 				UnityEditor.EditorApplication.isPlaying = false; 
 				#endif
             }
-            // Hide and lock cursor when right mouse button pressed
+            // HideWindowUI and lock cursor when right mouse button pressed
             if (Input.GetMouseButtonDown(1))
             {
                 Cursor.lockState = CursorLockMode.Locked;

@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Can not put Bait£¡");
+                UIManager.Instance.ShowTipUI("Insufficient bait available!z");
             }
             
         }

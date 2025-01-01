@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HammerCollide : MonoBehaviour
+public class TrapCollide : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Tag.ENEMY))
         {
             Destroy(other.gameObject);
+            Debug.Log("!!!!!!");
         }
         else if (other.CompareTag(Tag.PLAYER))
         {
             //TODO: Game Over
-            GameManager.Instance.GameOver(DeadType.Hammered);
+            GameManager.Instance.GameOver(DeadType.Trap);
         }
     }
 }

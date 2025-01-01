@@ -12,5 +12,6 @@ public class PopWindowUI : InteractableObject
     {
         haveInteracted = true;
         UIManager.Instance.Show(windowName, contentList);
+        Destroy(this.gameObject);
     }
 }
