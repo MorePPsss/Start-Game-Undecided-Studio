@@ -26,6 +26,7 @@ public class PlaneController : MonoBehaviour
     public Text subtitleText; // UI Text for subtitles
 
     private bool isCutscenePlaying = true; // Flag to disable player control during cutscene
+    public Image targetImage;
 
     private void Awake()
     {
@@ -176,6 +177,7 @@ public class PlaneController : MonoBehaviour
         moveSpeed = 0;
         isCutscenePlaying = false;
         subtitleText.text = "";
+        targetImage.gameObject.SetActive(false);
     }
 
     private IEnumerator ShowSubtitle(string message, float duration)
