@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     private GameObject player; // 用于保存玩家对象的引用
     public static bool ifFirstTimeGetBait = true;
     public static bool ifFirstRunOutofBait = true;
+    public static bool ifEnterAccompanyingMode = false;
 
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
     public void GameOver(string deadType)

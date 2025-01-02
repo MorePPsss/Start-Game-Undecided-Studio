@@ -15,6 +15,7 @@ public class FireExtinguisher : InteractableObject
             if (!haveInteractedFlag)
             {
                 fireManager.ActivateExtinguisher(fireAreaIndex);
+                UIManager.Instance.ShowTipUI("Open the valve.");
             }
         }else
         {

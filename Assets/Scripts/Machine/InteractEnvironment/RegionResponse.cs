@@ -28,7 +28,7 @@ public class RegionResponse : MonoBehaviour
                 firstArrive = true;
             }
         }
-        if (ifSwitchCamera)
+        if (ifSwitchCamera && !GameManager.ifEnterAccompanyingMode)
         { 
             if (cameraSwitcher != null && newVirtualCamera != null && !addCameraFlag)
             {

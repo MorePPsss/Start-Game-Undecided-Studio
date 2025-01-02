@@ -7,14 +7,10 @@ using UnityEngine.InputSystem;
 public class AccompanyingView : InteractableObject
 {
     public CinemachineFreeLook followCamera; // 特写相机
-    public GameObject door; // 门对象
-    private Animator doorAnimator; // 门的动画控制器
+    public GameObject[] doorsToDestroy;
     void Start()
     {
-        if (door != null)
-        {
-            doorAnimator = door.GetComponent<Animator>();
-        }
+        
     }
     void OnTriggerEnter(Collider other)
     {
@@ -29,20 +25,21 @@ public class AccompanyingView : InteractableObject
         if (switcher != null)
         {
             switcher.ActivateRobotMode(followCamera); // 激活机器人模式
+            GameManager.ifEnterAccompanyingMode = true;
             CineCameraSwitchManager.Instance.SwitchCamera(followCamera);
+            UIManager.Instance.ShowTipUI("Now it's in companion robot mode, trying to control the camera to turn left and right using the 'a' and'd 'keys, and adjusting the angle of view using the mouse wheel. (It seems that you already have permission to open the portal)");
             OpenDoor();
         }
         Destroy(gameObject);
     }
     private void OpenDoor()
     {
-        if (doorAnimator != null)
+        for (int i = 0; i < doorsToDestroy.Length; i++)
         {
-            doorAnimator.SetTrigger("PushButton");
-        }
-        else
-        {
-            Debug.LogWarning("Door Animator not set or missing.");
+            if (doorsToDestroy[i] != null)
+            {
+                Destroy(doorsToDestroy[i]);
+            }
         }
     }
 }

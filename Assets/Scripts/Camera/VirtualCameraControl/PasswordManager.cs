@@ -49,13 +49,13 @@ public class PasswordManager : MonoBehaviour
         {
             InteractableObject interactableObject = wallHasKeyboard.GetComponent<InteractableObject>();
             interactableObject.haveInteracted = true;
-            Debug.Log("密码正确！门已打开。");
             OnCloseButton();
             OpenDoor();
         }
         else
         {
-            Debug.Log("密码错误！");
+            UIManager.Instance.ShowTipUI("Look around and find clues to the correct password!");
+            Debug.Log("Password error！");
         }
         // 清空输入
         currentPassword = "";

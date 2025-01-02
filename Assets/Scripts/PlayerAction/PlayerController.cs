@@ -37,19 +37,19 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerAgent = GetComponent<NavMeshAgent>();
-        playerAnimator = GetComponent<Animator>();
+        //playerAnimator = GetComponent<Animator>();
         interactableObject = GetComponent<InteractableObject>();
-        playerAnimator.enabled = true;
+        //playerAnimator.enabled = true;
         GameManager.Instance.SetPlayer(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (AnimationControl_WalktoStand())
-        {
-            playerAnimator.SetBool(IsWalk, false);
-        }
+        //if (AnimationControl_WalktoStand())
+        //{
+        //    playerAnimator.SetBool(IsWalk, false);
+        //}
 
         if (Mouse.current.leftButton.isPressed)// Detect left mouse click -By Kehao
         {
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
             if (isCollide)
             {
                 hitPoint = hit.point;
-                playerAnimator.SetBool(IsWalk, true);
+                //playerAnimator.SetBool(IsWalk, true);
                 if (hit.collider.tag == Tag.GROUND || hit.collider.tag == Tag.BUTTON)
                 {
                     playerAgent.SetDestination(hit.point);//Call the SetDestination method to set the player's destination for movement -By Kehao
