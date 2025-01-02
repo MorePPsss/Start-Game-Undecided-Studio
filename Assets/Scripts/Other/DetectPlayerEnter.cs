@@ -12,7 +12,8 @@ public class DetectPlayerEnter : MonoBehaviour
     {
         CameraUpdate,
         EInteractiveObject,
-        SpaceInteractiveObject
+        SpaceInteractiveObject,
+        MouseInteractiveObject
     }
     public bool Setzone;
 
@@ -46,6 +47,9 @@ public class DetectPlayerEnter : MonoBehaviour
             case EventList.EInteractiveObject:
                 EInteractEvent(true);
                 break;
+            case EventList.MouseInteractiveObject:
+                MouseInteractiveObject(true);
+                break;
         }
     }
     private void exitEvent()
@@ -60,6 +64,9 @@ public class DetectPlayerEnter : MonoBehaviour
                 break;
             case EventList.EInteractiveObject:
                 EInteractEvent(false);
+                break;
+            case EventList.MouseInteractiveObject:
+                MouseInteractiveObject(false);
                 break;
         }
     }
@@ -84,9 +91,17 @@ public class DetectPlayerEnter : MonoBehaviour
         {
             Debug.Log("Canvas is not assigned.");
         }
-        if(handle !=  null)
+        if(handle != null)
         {
             handle.GetComponent<HandleObject>().canInteract = inside;
+        }
+    }
+    public void MouseInteractiveObject(bool inside)
+    {
+        if (handle.GetComponent<Rod>().powered)
+        {
+            canvas.gameObject.SetActive(inside);
+            handle.GetComponent<Rod>().interactable = inside;
         }
     }
 }

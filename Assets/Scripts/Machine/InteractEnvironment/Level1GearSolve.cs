@@ -8,6 +8,8 @@ public class Level1GearSolve : MonoBehaviour
     public GameObject handle;
     public GameObject EventArea;
     public GameObject sparks;
+    public GameObject gearLid;
+    public GameObject rod;
     private HandleObject handleobj;
     private bool solve = false;
 
@@ -43,6 +45,7 @@ public class Level1GearSolve : MonoBehaviour
         EventArea.SetActive(false);
         transform.rotation = powerGear.transform.rotation;
         enableGearRotate();
+        rod.GetComponent<Rod>().powered = true;
     }
     private void enableGearRotate()
     {
@@ -54,5 +57,6 @@ public class Level1GearSolve : MonoBehaviour
                 gear.GetComponent<SimpleGearMovement>().enabled = true;
             }
         }
+        gearLid.GetComponent<Animator>().enabled = true;
     }
 }
