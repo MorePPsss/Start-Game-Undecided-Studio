@@ -7,11 +7,19 @@ public class FireExtinguisher : InteractableObject
     public FireManager fireManager;
     public int fireAreaIndex;
     public bool haveInteractedFlag = false;
+    public bool isFakeValve = false;
     protected override void Interact()
     {
-        if (!haveInteractedFlag)
+        if (!isFakeValve)
         {
-            fireManager.ActivateExtinguisher(fireAreaIndex);
+            if (!haveInteractedFlag)
+            {
+                fireManager.ActivateExtinguisher(fireAreaIndex);
+            }
+        }else
+        {
+            UIManager.Instance.ShowTipUI("Pay attention to observing that the color of the fire extinguisher corresponds to the valve");
         }
+
     }
 }

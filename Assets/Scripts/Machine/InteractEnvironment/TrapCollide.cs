@@ -9,7 +9,6 @@ public class TrapCollide : MonoBehaviour
         if (other.CompareTag(Tag.ENEMY))
         {
             Destroy(other.gameObject);
-            Debug.Log("!!!!!!");
         }
         else if (other.CompareTag(Tag.PLAYER))
         {

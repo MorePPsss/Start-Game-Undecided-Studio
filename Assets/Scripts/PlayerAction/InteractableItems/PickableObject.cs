@@ -21,7 +21,7 @@ public class PickableObject : InteractableObject
             if (GameManager.ifFirstTimeGetBait)
             {
                 GameManager.ifFirstTimeGetBait = false;
-                Debug.Log("第一次捡起诱饵！");
+                UIManager.Instance.ShowTipUI("Press the x key and put down the 'bait' in front of you");
             }
             baitNum += 1;
             Debug.Log(baitNum);

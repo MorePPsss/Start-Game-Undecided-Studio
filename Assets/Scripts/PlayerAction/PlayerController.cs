@@ -90,7 +90,15 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                UIManager.Instance.ShowTipUI("Insufficient bait available!z");
+                if (GameManager.ifFirstRunOutofBait)
+                {
+                    UIManager.Instance.ShowTipUI("Without bait, you can only use yourself to attract the attention of security robots, but this way you will take a big risk!");
+                    GameManager.ifFirstRunOutofBait = false;
+                }else
+                {
+                    UIManager.Instance.ShowTipUI("Insufficient bait available!");
+                }
+                
             }
             
         }

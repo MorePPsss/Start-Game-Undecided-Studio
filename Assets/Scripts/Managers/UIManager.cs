@@ -82,10 +82,10 @@ public class UIManager : Singleton<UIManager>
         switch (deadType)
         {
             case DeadType.Trap:
-                contentTest.text = "Beware of the Trap!";
+                contentTest.text = "Beware of the SecuritySystem!";
                 break;
             case DeadType.Enemy:
-                contentTest.text = "Watch out the Enemy next time!";
+                contentTest.text = "Be careful to avoid crazy security robots!";
                 break;
             case DeadType.Burned:
                 contentTest.text = "Watch out the Fire next time!";

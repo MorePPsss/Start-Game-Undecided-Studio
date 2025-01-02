@@ -11,6 +11,7 @@ public class RegionResponse : MonoBehaviour
     public CameraSwitcher cameraSwitcher;
     public Cinemachine.CinemachineVirtualCamera newVirtualCamera;
     public bool addCameraFlag = false;
+    public bool firstArrive = false;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -20,14 +21,18 @@ public class RegionResponse : MonoBehaviour
     {
         if (ifPopTip)
         {
-            Debug.Log("µ¯´°");
-            UIManager.Instance.ShowTipUI(tipContent);
+            if (!firstArrive)
+            {
+                Debug.Log("PopWindow");
+                UIManager.Instance.ShowTipUI(tipContent);
+                firstArrive = true;
+            }
         }
         if (ifSwitchCamera)
-        {
-            Debug.Log("ÇÐ»»Ïà»ú");
+        { 
             if (cameraSwitcher != null && newVirtualCamera != null && !addCameraFlag)
             {
+                Debug.Log("SwitchCamera");
                 cameraSwitcher.AddVirtualCamera(newVirtualCamera);
                 addCameraFlag = true;
             }
