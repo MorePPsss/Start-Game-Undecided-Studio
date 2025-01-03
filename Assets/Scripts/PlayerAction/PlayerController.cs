@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Put Bait！");
                 InteractableObject.baitNum -= 1;
+                UIManager.Instance.ShowBaitNumUI(InteractableObject.baitNum);
                 Vector3 baitPosition = transform.position + transform.forward; // 2是距离玩家的偏移量
                 Instantiate(baitPrefab, baitPosition, Quaternion.identity);
                 //TODO:instantiate Bait Object

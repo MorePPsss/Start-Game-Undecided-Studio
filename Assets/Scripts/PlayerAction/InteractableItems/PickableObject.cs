@@ -22,8 +22,10 @@ public class PickableObject : InteractableObject
             {
                 GameManager.ifFirstTimeGetBait = false;
                 UIManager.Instance.ShowTipUI("Press the x key and put down the 'bait' in front of you");
+                UIManager.Instance.ShowBaitNumUI(baitNum);
             }
             baitNum += 1;
+            UIManager.Instance.ShowBaitNumUI(baitNum);
             Debug.Log(baitNum);
         }
     }

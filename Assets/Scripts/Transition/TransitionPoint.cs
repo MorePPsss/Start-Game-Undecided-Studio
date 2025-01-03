@@ -19,11 +19,15 @@ public class TransitionPoint : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.T) && canTrans)
         {
-            Debug.Log("¿ªÊ¼´«ËÍ£¡");
+            Debug.Log("Starting teleportation£¡");
             SceneController.Instance.TransitionToDestination(this);
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        UIManager.Instance.ShowTipUI("Press'  t  'to start teleportation!");
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag(Tag.PLAYER))
