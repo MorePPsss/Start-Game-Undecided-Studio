@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class CameraFlatMove : MonoBehaviour
 {
     
     public float moveSpeed = 80f; 
-    public float smoothTime = 0.12f; 
+    public float smoothTime = 0.12f;
+    public float level;
+    public Vector3 presetPos;
     private Vector3 velocity = Vector3.zero; 
     private GameObject player;
 
@@ -22,9 +25,12 @@ public class CameraFlatMove : MonoBehaviour
         if (follow)
         {
             CameraFollowPlayer();
-        }else
+        }else if(level == 1)
         {
             MovetoLevel1PresetPos();
+        }else if (level == 2)
+        {
+            MovetoPresetPos();
         }
     }
     private void CameraFollowPlayer()
@@ -58,6 +64,11 @@ public class CameraFlatMove : MonoBehaviour
         {
             pos.y = 8.29f;
         }
+        SetCameraPos(pos);
+    }
+    private void MovetoPresetPos()
+    {
+        Vector3 pos = presetPos;
         SetCameraPos(pos);
     }
 }

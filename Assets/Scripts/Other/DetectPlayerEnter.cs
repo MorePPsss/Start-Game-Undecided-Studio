@@ -8,6 +8,7 @@ public class DetectPlayerEnter : MonoBehaviour
 {
     public Canvas canvas;
     public GameObject handle;
+    public Vector3 presetPos;
     public enum EventList
     {
         CameraUpdate,
@@ -15,7 +16,7 @@ public class DetectPlayerEnter : MonoBehaviour
         SpaceInteractiveObject,
         MouseInteractiveObject
     }
-    public bool Setzone;
+    public bool centerZone;
 
     [SerializeField]
     private EventList eventlist;
@@ -39,7 +40,7 @@ public class DetectPlayerEnter : MonoBehaviour
         switch (eventlist)
         {
             case EventList.CameraUpdate:
-                CameraSetPos(Setzone);
+                CameraSetPos(centerZone);
                 break;
             case EventList.SpaceInteractiveObject:
                 
@@ -57,7 +58,7 @@ public class DetectPlayerEnter : MonoBehaviour
         switch (eventlist)
         {
             case EventList.CameraUpdate:
-                CameraSetPos(Setzone);
+                CameraSetPos(centerZone);
                 break;
             case EventList.SpaceInteractiveObject:
 
@@ -75,6 +76,7 @@ public class DetectPlayerEnter : MonoBehaviour
     {
         Camera camera = GameObject.Find("Camera").GetComponent<Camera>();
         camera.GetComponent<CameraFlatMove>().inZone = Inside;
+        camera.GetComponent<CameraFlatMove>().presetPos = presetPos;
     }
     private void CameraFollowPlayer(bool follow)
     {
