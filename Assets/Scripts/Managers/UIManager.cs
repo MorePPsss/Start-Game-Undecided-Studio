@@ -11,9 +11,11 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI contentText;
     public TextMeshProUGUI tipContentText;
     public TextMeshProUGUI cameraIndexText;
+    public TextMeshProUGUI baitNumText;
     [Header("UI Objects")]
     public GameObject windowObject;
     public GameObject tipUIObject;
+    public GameObject baitNumUIObject;
     public GameObject gameOverUI; // ÓÎÏ·½áÊøµÄµ¯´° UI
     [Header("CameraInfo")]
     public CameraSwitcher cameraSwitcher;
@@ -27,6 +29,12 @@ public class UIManager : Singleton<UIManager>
     private void Update()
     {
         ShowCameraUI();
+    }
+
+    public void ShowBaitNumUI(int baitNum)
+    {
+        baitNumUIObject.SetActive(true);
+        baitNumText.text = "BaitNumber:" + baitNum;
     }
     public void Show(string popWindowTitle, string[] content)
     {
