@@ -27,12 +27,14 @@ public class PlaneController : MonoBehaviour
 
     private bool isCutscenePlaying = true; // Flag to disable player control during cutscene
     public Image targetImage;
+    public AudioClip toggleSpeedSound;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         // Initialize the Rigidbody component
         rb = GetComponent<Rigidbody>();
-
+        audioSource = GetComponent<AudioSource>();
         // Subscribe to toggle speed event from InputManager
         if (InputManager.instance != null)
         {
@@ -154,25 +156,49 @@ public class PlaneController : MonoBehaviour
 
     private void ToggleSpeed()
     {
-        // Toggle move speed between 10 and 0
-        if (!isCutscenePlaying) // Allow speed toggle only after the cutscene
+        if (!isCutscenePlaying) 
         {
+            
             moveSpeed = moveSpeed == 0 ? 10 : 0;
+
+            if (moveSpeed == 10)
+            {
+                
+                if (toggleSpeedSound != null && !audioSource.isPlaying)
+                {
+                    audioSource.clip = toggleSpeedSound;
+                    audioSource.loop = true; 
+                    audioSource.Play();
+                }
+            }
+            else
+            {
+                
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                }
+            }
+
             Debug.Log($"Move Speed Toggled: {moveSpeed}");
         }
     }
+
 
     private IEnumerator PlayOpeningCutscene()
     {
         moveSpeed = 10; // Plane moves at speed 10
         subtitleText.text = ""; // Clear any existing subtitle
-
+        audioSource.clip = toggleSpeedSound;
+        audioSource.loop = true;
+        audioSource.Play();
         // Display subtitles one by one
-        yield return ShowSubtitle("Hi, Commander. It seems you have reached the target area.", 3f);
-        yield return ShowSubtitle("There are four areas, get in there and decoding the enemy's secrets.", 3f);
-        yield return ShowSubtitle("Good luck, commander!", 3f);
+        yield return ShowSubtitle("Hi, Commander. It seems you have reached the target area.", 6f);
+        yield return ShowSubtitle("There are four areas, get in there and decode the enemy's secrets.", 10f);
+        yield return ShowSubtitle("We are all counting on you commander.", 3f);
 
         // End cutscene
+        audioSource.Stop();
         thrustInput = 0;
         moveSpeed = 0;
         isCutscenePlaying = false;

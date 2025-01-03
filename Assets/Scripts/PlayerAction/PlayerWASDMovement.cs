@@ -67,6 +67,7 @@ public class PlayerWASDMovement : MonoBehaviour
     {
         Vector3 moveDir = inputMoveDir;
         moveDir.y = -0.00001f;
+        Debug.Log(moveDir);
         rb.MovePosition(rb.position + moveDir * moveSpeed * Time.deltaTime);
     }
 }

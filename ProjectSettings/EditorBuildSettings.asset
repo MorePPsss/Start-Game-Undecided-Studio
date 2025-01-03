@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Airplane.unity
     guid: b68ffd5022799fd4baef95290c86197c
+  - enabled: 1
+    path: Assets/Scenes/EnemyChasingLevel/EnemyChasingLevel.unity
+    guid: f3cb949565904614d89629b0b33b56e3
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
