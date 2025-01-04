@@ -6,15 +6,25 @@ using UnityEngine;
 
 public class Gear : MonoBehaviour
 {
+    public bool autoConnect = false;
     public bool isBlock = false;
+    public bool clockwise;
+    public bool removing = false;
+
     public float radius = 0.25f;
     public int numGearTeeth = 12;
-    public GearAxis axis = null;
+    public float linearSpeed;              //Gear teeth speed: number of teeth per second\
+
+    //public GearAxis axis = null;
     public bool isPowerGear;
-    private float remRadius = 0.25f;
+    public Vector3 axisDir;
+    [SerializeField]
     private List<Gear> connectGears = new List<Gear>();
+    [SerializeField]
+    private List<Gear> axisConnectGears = new List<Gear>();
+
+    private float remRadius = 0.25f;
     private float torque;
-    private float linearSpeed;              //Gear teeth speed: number of teeth per second
     private float maxGearRadius = 5;
     private Gear powerbyGear = null;
     public float linSpeed
@@ -25,44 +35,74 @@ public class Gear : MonoBehaviour
     {
         get { return connectGears; }
     }
-
     private void Update()
     {
-        if(linearSpeed != 0)
+        if (linearSpeed != 0)
         {
             float speed = 360 * Time.deltaTime * linearSpeed / numGearTeeth;
+            if(clockwise) { speed *= -1; }
             if(speed == Mathf.Infinity|| numGearTeeth == 0) { speed = 0; }
-            transform.rotation *= Quaternion.Euler(0f, speed , 0f);
+            transform.rotation *= Quaternion.Euler(axisDir * speed);
         }
-        NearbyGear();
-        if(powerbyGear != null)
+        if (autoConnect)
         {
-            float maxDistance = powerbyGear.radius + radius + 0.15f;
-            if (GearFlatVector(powerbyGear.transform, transform).magnitude > maxDistance || Mathf.Abs(powerbyGear.transform.position.y - transform.position.y) > 0.13f)
+            NearbyGear();
+            if(powerbyGear != null)
             {
-                GearDepart();
+                float maxDistance = powerbyGear.radius + radius + 0.15f;
+                if (GearFlatVector(powerbyGear.transform, transform).magnitude > maxDistance || Mathf.Abs(powerbyGear.transform.position.y - transform.position.y) > 0.13f)
+                {
+                    GearDepart();
+                }
+                else if (powerbyGear.linSpeed == 0)
+                {
+                    UpdateLinearSpeed(0, null);
+                }
             }
-            else if (powerbyGear.linSpeed == 0)
+            if(radius != remRadius)
             {
-                UpdateLinearSpeed(0, null);
+                ResizeGear();
+                remRadius = radius;
             }
-        }
-        if(radius != remRadius)
-        {
-            ResizeGear();
-            remRadius = radius;
-        }
-        if (isBlock)
-        {
-            linearSpeed = 0f;
         }
     }
-    //change gear scale according to radius
+    //change gear scale according to radius(abandon)
     private void ResizeGear()
     {
         transform.localScale = new Vector3(2 * radius, 0.05f, 2 * radius);
     }
-    //chain update all nearby gear linearSpeed, called when gears update
+    //UpdateLinearSpeed and check block
+    public bool UpdateGearLinearSpeed()
+    {
+        if (isBlock)
+        {
+            return false;
+        }
+        foreach (Gear gear in connectGears) 
+        {
+            if(gear.linearSpeed == linearSpeed && gear.clockwise == !clockwise ){ continue; }
+            //else if (gear.linearSpeed != 0) { return false; }
+            if (gear.removing) { continue; }
+            gear.linearSpeed = linearSpeed;
+            gear.clockwise = !clockwise;
+            if(!gear.UpdateGearLinearSpeed())
+            {
+                return false;
+            }
+        }
+        foreach(Gear gear in axisConnectGears)
+        {
+            gear.linearSpeed = linearSpeed / numGearTeeth * gear.numGearTeeth;
+            gear.clockwise = clockwise;
+            if (!gear.UpdateGearLinearSpeed())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //chain update all nearby gear linearSpeed, called when gears update (abandon)
     public void UpdateLinearSpeed(float speed, Gear powerGear)
     {
         linearSpeed = speed;

@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (hit.collider.tag == Tag.GEAR)
                 {
-                    hit.collider.GetComponentInParent<GearMachineControl>().PickUpGear(hit.transform);
+                    
                 }
             }
         }

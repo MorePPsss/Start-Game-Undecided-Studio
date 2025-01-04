@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+//----------------------------------abandon-----------------------------------
 public class GearAxis : MonoBehaviour
 {
-    public float velAngular = 0; //velAngular = linearSpeed / numGearTeeth;
+/*    public float velAngular = 0; //velAngular = linearSpeed / numGearTeeth;
     public Gear Powergear = null;
     public List<Gear> sharedAxisGears = new List<Gear>();
     private void Update()
@@ -78,5 +78,5 @@ public class GearAxis : MonoBehaviour
     private void UpdateGearsSpeed(Gear addedGear)
     {
         addedGear.UpdateLinearSpeed(velAngular * addedGear.numGearTeeth, null);
-    }
+    }*/
 }

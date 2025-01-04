@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+//-----------------------------------abandon--------------------------------
 public class GearMachineControl : MonoBehaviour
 {
-    public Gear blockGear;
+/*    public Gear blockGear;
     public Gear powerSauseGear;
     public Gear detectGear;
     public GameObject machine;
@@ -140,5 +140,5 @@ public class GearMachineControl : MonoBehaviour
             axis.sharedAxisGears.Add(clickGear);
             clickGear.axis = axis;
         }
-    }
+    }*/
 }
