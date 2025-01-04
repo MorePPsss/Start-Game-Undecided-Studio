@@ -25,6 +25,7 @@ public class RegionResponse : MonoBehaviour
             {
                 Debug.Log("PopWindow");
                 UIManager.Instance.ShowTipUI(tipContent);
+                UIManager.Instance.ShowCameraControlTip();
                 firstArrive = true;
             }
         }

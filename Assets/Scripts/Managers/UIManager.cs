@@ -12,11 +12,14 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI tipContentText;
     public TextMeshProUGUI cameraIndexText;
     public TextMeshProUGUI baitNumText;
+    public TextMeshProUGUI cameraControlTipText;
+    public TextMeshProUGUI baitContorlTipText;
     [Header("UI Objects")]
     public GameObject windowObject;
     public GameObject tipUIObject;
     public GameObject baitNumUIObject;
     public GameObject gameOverUI; // ÓÎÏ·½áÊøµÄµ¯´° UI
+    public GameObject gameControlUIObject;
     [Header("CameraInfo")]
     public CameraSwitcher cameraSwitcher;
     private List<string> contentList;
@@ -63,6 +66,24 @@ public class UIManager : Singleton<UIManager>
         {
             cameraIndexText.text = "Camera: " + cameraSwitcher.GetCurrentCameraIndex();
         }
+    }
+
+    public void ShowCameraControlTip()
+    {
+        if (gameControlUIObject != null)
+        {
+            gameControlUIObject.SetActive(true);
+        }
+        if (cameraControlTipText != null)
+        {
+            cameraControlTipText.text = "Pressing 'z (previous)' 'c (next)'";
+            baitContorlTipText.text = "";
+        }
+    }
+
+    public void ShowBaitControlTip()
+    {
+        baitContorlTipText.text = "Pressing 'x'to set bait";
     }
 
     public void HideWindowUI()
