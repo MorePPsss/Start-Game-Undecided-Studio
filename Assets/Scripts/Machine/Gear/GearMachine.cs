@@ -15,8 +15,10 @@ public class GearMachine : MonoBehaviour
     public Camera mainCamera;
     public Vector3 layerDrift;
     public TrainRod trainRod;
+    public Transform gearMachine3DUI;
 
     private float layerMoveTime;
+    private bool firstChange;
     private bool exchangingGear;
     private bool layerMoving;
     private int currentGearLayer;
@@ -28,6 +30,7 @@ public class GearMachine : MonoBehaviour
 
     private void Start()
     {
+        firstChange = true;
         exchangingGear = false;
         layerMoving = false;
         currentGearLayer = 0;
@@ -122,6 +125,12 @@ public class GearMachine : MonoBehaviour
     }
     public void LayerChange(float direction)
     {
+        if(firstChange)
+        {
+            firstChange = false;
+            gearMachine3DUI.GetChild(0).gameObject.SetActive(true);
+            SetUIDisappear(gearMachine3DUI.GetChild(1));
+        }
         int nextCalLayer = (int)(currentGearLayer + direction);
         if (nextCalLayer >= 0 && nextCalLayer < 3 && !layerMoving) 
         {
@@ -136,6 +145,11 @@ public class GearMachine : MonoBehaviour
                 }
             }
         }
+    }
+    private void SetUIDisappear(Transform UI)
+    {
+        UI.GetChild(0).gameObject.SetActive(false);
+        UI.GetChild(1).gameObject.SetActive(true);
     }
     private void MoveGearLayer()
     {

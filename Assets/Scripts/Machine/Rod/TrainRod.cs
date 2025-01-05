@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
-
+//not a good code. Just for achieving the effect.
+//problem with quaternion.(need repair)
 public class TrainRod : MonoBehaviour
 {
     public bool powered;
@@ -11,9 +12,9 @@ public class TrainRod : MonoBehaviour
     public LayerMask layerMask;
     public float rodAreaRadius;
     public Vector3 rotateAxis;
-    public bool canInteractive;
-    public float atanNum;
     public Train train;
+    public GameObject gearMachineUI;
+    public GameObject smallRod;
 
     private Vector2 mouseStartPos;
     private Vector3 targetPos;
@@ -75,6 +76,8 @@ public class TrainRod : MonoBehaviour
                 mainCamera.GetComponent<CameraFlatMove>().enabled = true;
                 mainCamera.transform.position = new Vector3(-2.98f, 5.8f, -22f);
                 train.targetPos = new Vector3(-6.37f, 0, 0);
+                smallRod.transform.rotation = Quaternion.Euler(30, 0, 0);
+                gearMachineUI.SetActive(false);
                 this.enabled = false;
             }
         }else if (!hold && !finish)
