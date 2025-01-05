@@ -9,6 +9,7 @@ public class GearMachineEInteract : MonoBehaviour
     public Camera mainCamera;
     public GameObject gearMachine;
     public GameObject gearMachineArea;
+    public GameObject gearMachineUI;
 
     private PlayerInput playerInput;
     private void Start()
@@ -34,10 +35,12 @@ public class GearMachineEInteract : MonoBehaviour
         {
             playerInput.Disable();
             gearMachine.SetActive(true);
+            gearMachineArea.SetActive(false);
             mainCamera.transform.position = new Vector3(-41.54f, 5.8f, -22.05f);
+            canInteract = false;
             mainCamera.GetComponent<CameraFlatMove>().enabled = false;
             mainCamera.fieldOfView = 38;
-
+            gearMachineUI.SetActive(true);
         }
     }
 }
