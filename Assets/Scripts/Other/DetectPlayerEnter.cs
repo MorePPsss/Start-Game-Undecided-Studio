@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Searcher.Searcher.AnalyticsEvent;
@@ -8,13 +9,15 @@ public class DetectPlayerEnter : MonoBehaviour
 {
     public Canvas canvas;
     public GameObject handle;
+    public GameObject gearMachine;
     public Vector3 presetPos;
     public enum EventList
     {
         CameraUpdate,
         EInteractiveObject,
         SpaceInteractiveObject,
-        MouseInteractiveObject
+        MouseInteractiveObject,
+        EnterInteractive,
     }
     public bool centerZone;
 
@@ -50,6 +53,9 @@ public class DetectPlayerEnter : MonoBehaviour
                 break;
             case EventList.MouseInteractiveObject:
                 MouseInteractiveObject(true);
+                break;
+            case EventList.EnterInteractive:
+                EnterInteractive();
                 break;
         }
     }
@@ -87,11 +93,17 @@ public class DetectPlayerEnter : MonoBehaviour
     {
         if (canvas != null)
         {
-            canvas.gameObject.SetActive(inside);
+            //canvas.gameObject.SetActive(inside);
+            canvas.gameObject.transform.GetChild(0).gameObject.SetActive(inside);
+            canvas.gameObject.transform.GetChild(1).gameObject.SetActive(!inside);
         }
         else
         {
             Debug.Log("Canvas is not assigned.");
+        }
+        if(gearMachine != null)
+        {
+            gearMachine.GetComponent<GearMachineEInteract>().canInteract = true;
         }
         if(handle != null)
         {
@@ -104,6 +116,13 @@ public class DetectPlayerEnter : MonoBehaviour
         {
             canvas.gameObject.SetActive(inside);
             handle.GetComponent<Rod>().interactable = inside;
+        }
+    }
+    public void EnterInteractive()
+    {
+        if (canvas != null)
+        {
+            canvas.gameObject.SetActive(true);
         }
     }
 }

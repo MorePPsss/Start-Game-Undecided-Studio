@@ -41,6 +41,7 @@ public class PlayerWASDMovement : MonoBehaviour
         
         inputMoveDir = new Vector3(Input.GetAxis("Horizontal"), -0.0f, Input.GetAxis("Vertical")).normalized;
         Quaternion faceTargDir = Quaternion.FromToRotation(transform.forward, inputMoveDir) * transform.rotation;
+        
         if (!canTurn)
         {
             faceTargDir = Quaternion.FromToRotation(transform.forward, holdDir) * transform.rotation;
@@ -52,7 +53,6 @@ public class PlayerWASDMovement : MonoBehaviour
             faceTargDir.x = 0;
             faceTargDir.z = 0;
         }
-
         transform.rotation = Quaternion.Slerp(transform.rotation, faceTargDir, Math.Min(0.9f, rotateSpeed * Time.deltaTime));
 
     }
@@ -66,8 +66,7 @@ public class PlayerWASDMovement : MonoBehaviour
     private void Move()
     {
         Vector3 moveDir = inputMoveDir;
-        moveDir.y = -0.00001f;
-        Debug.Log(moveDir);
+        moveDir.y = 0.0f;
         rb.MovePosition(rb.position + moveDir * moveSpeed * Time.deltaTime);
     }
 }

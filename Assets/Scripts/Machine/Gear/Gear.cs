@@ -92,6 +92,7 @@ public class Gear : MonoBehaviour
         }
         foreach(Gear gear in axisConnectGears)
         {
+            if (gear.removing) { continue; }
             gear.linearSpeed = linearSpeed / numGearTeeth * gear.numGearTeeth;
             gear.clockwise = clockwise;
             if (!gear.UpdateGearLinearSpeed())

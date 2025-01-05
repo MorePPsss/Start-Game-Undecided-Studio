@@ -36,9 +36,9 @@ Material:
     - _UnderlayOffsetY: 0
     - _UnderlaySoftness: 0
     m_Colors:
-    - _FaceColor: {r: 2.828427, g: 2.828427, b: 2.828427, a: 0.72156864}
+    - _FaceColor: {r: 2.828427, g: 2.828427, b: 2.828427, a: 0.70980394}
     - _OutlineColor: {r: 2521.3838, g: 2521.3838, b: 2521.3838, a: 1}
-    - _UnderlayColor: {r: 15.813401, g: 0, b: 0, a: 0.22352941}
+    - _UnderlayColor: {r: 15.813401, g: 0, b: 0, a: 0.18431373}
   m_BuildTextureStacks: []
 --- !u!114 &11400000
 MonoBehaviour:
