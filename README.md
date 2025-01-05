@@ -9,5 +9,11 @@ RobotOo is a puzzle-platformer set in a steampunk world where players control a 
 - **Press R to retry the current level**.
 - **Objective**: Find missing parts scattered throughout each level and use them to unlock new areas, solve puzzles, and escape.
 ## Known Issues
+
+## Assets
+Mountain Terrain, Rocks and Tree ,Jermesa Studio, https://assetstore.unity.com/packages/3d/environments/landscapes/mountain-terrain-rocks-and-tree-97905#publisher
+Urban building,Game Stuff Studio,https://assetstore.unity.com/packages/3d/props/exterior/urban-building-130318#publisher
+WaterWorks - Simple water/ocean/river system for URP + reflection + refraction,GapperGames Studios,https://assetstore.unity.com/packages/3d/environments/waterworks-simple-water-ocean-river-system-for-urp-reflection-re-206909#publisher
+Free Island Collection,Bicameral Studios,https://assetstore.unity.com/packages/3d/environments/landscapes/free-island-collection-104753#publisher
 ## Change log
 v0.1.0 (2024-10-22)
