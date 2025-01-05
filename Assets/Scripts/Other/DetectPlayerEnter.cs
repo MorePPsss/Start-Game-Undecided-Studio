@@ -4,7 +4,8 @@ using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Searcher.Searcher.AnalyticsEvent;
-
+//for all requirement to detect player enter certain area cause event
+//use eventlist to change event mode
 public class DetectPlayerEnter : MonoBehaviour
 {
     public Canvas canvas;
@@ -93,7 +94,7 @@ public class DetectPlayerEnter : MonoBehaviour
     {
         if (canvas != null)
         {
-            //canvas.gameObject.SetActive(inside);
+            //let canvas disappear(by using animation to set transparent)
             canvas.gameObject.transform.GetChild(0).gameObject.SetActive(inside);
             canvas.gameObject.transform.GetChild(1).gameObject.SetActive(!inside);
         }
@@ -122,6 +123,7 @@ public class DetectPlayerEnter : MonoBehaviour
     {
         if (canvas != null)
         {
+            //word panel UI
             canvas.gameObject.SetActive(true);
         }
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-
+//pure text introduce changing
 public class UIPanelClick : MonoBehaviour
 {
     public float waitTime;

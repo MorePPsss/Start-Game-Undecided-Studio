@@ -12376,8 +12376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89e7228e20710244aa64b110b17fd36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 70
-  smoothTime: 0.5
+  moveSpeed: 80
+  smoothTime: 0.25
   level: 2
   presetPos: {x: -8.22, y: 5.8, z: -22.05}
   follow: 0
