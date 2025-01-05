@@ -18,10 +18,10 @@ EditorBuildSettings:
     path: Assets/Scenes/GearBasicLevel.unity
     guid: 7134b966e7901f143a2ce1852e42e513
   - enabled: 1
-    path: Assets/Scenes/SteamBoiler.unity
+    path: Assets/Scenes/SteamBoiler/SteamBoiler.unity
     guid: a4be8854ee508194a8a003c5aa08792e
   - enabled: 1
-    path: Assets/Scenes/SteamBoiler 2.unity
+    path: Assets/Scenes/SteamBoiler 2/SteamBoiler 2.unity
     guid: d4c8983b8dc094c49981f9f93529215c
   - enabled: 1
     path: Assets/Scenes/Airplane.unity

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class ButtonControl : MonoBehaviour
 {
     private NavMeshObstacle navMeshObstacle;
-    public DoorControl doorControl;
+    public DoorControlSteam doorControl;
 
     // Triggered when the player steps on the pedal
     void OnTriggerEnter(Collider other)
