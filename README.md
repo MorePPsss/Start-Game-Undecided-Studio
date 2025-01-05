@@ -11,6 +11,9 @@ RobotOo is a puzzle-platformer set in a steampunk world where players control a 
 ## Known Issues
 
 ## Assets
+All 3D mesh in GearCheckLevel and 2 Floor Level created by ss-7e(Yichen).
+brozen texture and gearmachine normal texture: create by ss-7e.
+electronic partical effect, https://assetstore.unity.com/packages/vfx/particles/spells/zap-vfx-urp-303479
 Mountain Terrain, Rocks and Tree ,Jermesa Studio, https://assetstore.unity.com/packages/3d/environments/landscapes/mountain-terrain-rocks-and-tree-97905#publisher
 Urban building,Game Stuff Studio,https://assetstore.unity.com/packages/3d/props/exterior/urban-building-130318#publisher
 WaterWorks - Simple water/ocean/river system for URP + reflection + refraction,GapperGames Studios,https://assetstore.unity.com/packages/3d/environments/waterworks-simple-water-ocean-river-system-for-urp-reflection-re-206909#publisher
