@@ -42,7 +42,7 @@ public class PlayerWASDMovement : MonoBehaviour
         inputMoveDir = new Vector3(Input.GetAxis("Horizontal"), -0.0f, Input.GetAxis("Vertical")).normalized;
         Quaternion faceTargDir = Quaternion.FromToRotation(transform.forward, inputMoveDir) * transform.rotation;
         
-        if (!canTurn)
+        if (!canTurn)               // calling when robot hold handle
         {
             faceTargDir = Quaternion.FromToRotation(transform.forward, holdDir) * transform.rotation;
         }

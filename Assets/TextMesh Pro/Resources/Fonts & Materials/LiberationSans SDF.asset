@@ -9,9 +9,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: LiberationSans SDF Material
   m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-  m_Parent: {fileID: 2100000, guid: 9f839c67f4866f346899018b02c9fde7, type: 2}
+  m_Parent: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords:
+  - OUTLINE_ON
   - UNDERLAY_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 1
@@ -27,7 +28,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _FaceDilate: -0.299
-    - _OutlineSoftness: 1
+    - _OutlineSoftness: 0.2
     - _OutlineWidth: 0
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
@@ -36,9 +37,9 @@ Material:
     - _UnderlayOffsetY: 0
     - _UnderlaySoftness: 0
     m_Colors:
-    - _FaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FaceColor: {r: 1.741101, g: 1.741101, b: 1.741101, a: 1}
     - _OutlineColor: {r: 2521.3838, g: 2521.3838, b: 2521.3838, a: 1}
-    - _UnderlayColor: {r: 15.813401, g: 0, b: 0, a: 0.18431373}
+    - _UnderlayColor: {r: 15.813401, g: 0, b: 0, a: 0.23529412}
   m_BuildTextureStacks: []
 --- !u!114 &11400000
 MonoBehaviour:
