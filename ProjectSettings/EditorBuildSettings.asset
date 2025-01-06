@@ -9,14 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 323319d2b7652c446af4a2850e97311d
   - enabled: 1
-    path: Assets/Scenes/TwoFloors.unity
+    path: Assets/Scenes/TwoFloors/TwoFloors.unity
     guid: 190a6fc61f5d5e64c84be699a80c4ba3
-  - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 51b3ddb16592ed84bb62edbf5c877eda
-  - enabled: 1
-    path: Assets/Scenes/GearBasicLevel.unity
-    guid: 7134b966e7901f143a2ce1852e42e513
   - enabled: 1
     path: Assets/Scenes/SteamBoiler/SteamBoiler.unity
     guid: a4be8854ee508194a8a003c5aa08792e

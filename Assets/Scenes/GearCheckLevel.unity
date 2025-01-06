@@ -2684,6 +2684,7 @@ MonoBehaviour:
   gearMachine: {fileID: 664303011667958105}
   gearMachineArea: {fileID: 1639820954}
   gearMachineUI: {fileID: 1610343368}
+  Door3DUI: {fileID: 0}
 --- !u!1 &353042256
 GameObject:
   m_ObjectHideFlags: 0
@@ -7853,7 +7854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6f60293ab304c469e8e86b11b5d2ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneIndex: 6
+  nextSceneIndex: 4
 --- !u!1 &1249589186
 GameObject:
   m_ObjectHideFlags: 0
