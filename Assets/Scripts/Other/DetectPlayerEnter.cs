@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Searcher.Searcher.AnalyticsEvent;
+
 //for all requirement to detect player enter certain area cause event
 //use eventlist to change event mode
 public class DetectPlayerEnter : MonoBehaviour

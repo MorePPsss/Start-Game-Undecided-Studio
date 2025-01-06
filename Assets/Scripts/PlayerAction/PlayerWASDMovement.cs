@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using static UnityEngine.Rendering.DebugUI;
-using UnityEditor.Recorder;
+
 using TMPro;
 
 public class PlayerWASDMovement : MonoBehaviour

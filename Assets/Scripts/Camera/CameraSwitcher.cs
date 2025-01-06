@@ -1,6 +1,6 @@
 using UnityEngine;
 using Cinemachine;
-using UnityEngine.Windows.WebCam;
+
 
 public class CameraSwitcher : MonoBehaviour
 {
